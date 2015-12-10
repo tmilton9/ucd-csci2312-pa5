@@ -18,6 +18,13 @@ namespace Gaming {
     public:
         static const double AGENT_FATIGUE_RATE;
 
+        virtual PieceType getType() const override ;
+
+        virtual ActionType takeTurn(const Surroundings &surr) const override ;
+
+    protected:
+        virtual void print(std::ostream &os) const override ;
+
         Agent(const Game &g, const Position &p, double energy);
         ~Agent();
 

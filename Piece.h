@@ -33,7 +33,7 @@ namespace Gaming {
         bool isFinished() const { return __finished; }
 
     public:
-        Piece(const Game &g, const Position &p);
+        Piece(const Game &g, const Position &p, const Game &__game);
         virtual ~Piece();
 
         const Position getPosition() const { return __position; }
