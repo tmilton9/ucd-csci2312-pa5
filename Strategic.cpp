@@ -4,12 +4,12 @@
 
 #include <iosfwd>
 #include "Agent.h"
-#include "Gaming.h"
-namespace Gaming {
-    Strategic::Strategic(const Game &g, const Position &p,
-                                 double energy,
-                                 Strategy *s) {
 
+#include "Strategic.h"
+namespace Gaming {
+    const char Strategic::STRATEGIC_ID = 'T';
+    Strategic::Strategic(const Game &g, const Position &p, double energy, Strategy *s): Agent(g, p, energy) {
+    __strategy = s;
     }
 
     Strategic::~Strategic() {
@@ -20,7 +20,9 @@ namespace Gaming {
         Agent::print(os);
     }
 
-    Gaming::ActionType Gaming::Strategic::takeTurn(const Surroundings &s) const {
+    ActionType Gaming::Strategic::takeTurn(const Surroundings &s) const {
+
+        Surroundings surr;
         return Agent::takeTurn(surr);
     }
 }

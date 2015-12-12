@@ -4,16 +4,18 @@
 
 #include <iosfwd>
 #include "Resource.h"
+#include "Food.h"
 namespace Gaming {
-    Gaming::Food::Food(const ::Gaming::Food::Game &g, const ::Gaming::Food::Position &p, double capacity) {
+    const char Food::FOOD_ID = 'F';
+    Food::Food( const Game &g, const Position &p, double capacity) : Resource( g, p, capacity) {
 
     }
 
-    Gaming::Food::~Food() {
+    Food::~Food() {
 
     }
 
-    void Gaming::Food::print(std::ostream &os) const {
+    void Food::print(std::ostream &os) const {
       Resource::print(os);
     }
 }

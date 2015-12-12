@@ -15,8 +15,9 @@ namespace Gaming {
 
     public:
         static const double ADVANTAGE_MULT_FACTOR;
-
-        Advantage(const Game &g, const Position &p, double capacity);
+        Advantage()= delete;
+        Advantage(const Game &g, const Position &p,
+                          double capacity);
         ~Advantage();
 
         PieceType getType() const override { return PieceType::ADVANTAGE; }

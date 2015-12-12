@@ -5,11 +5,17 @@
 
 namespace Gaming
 {
-Piece::Piece(const Game &g, const Position &p) : __game(__game) {
+Piece::Piece(const Game &g, const Position &p, const Game &__game) : __game(__game) {
+
+    setPosition(p);
 
 }
 
 Gaming::Piece::~Piece() {
 
 }
+
+    std::ostream &operator<<(std::ostream &os, const Piece &piece) {
+        return os;
+    }
 }

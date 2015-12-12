@@ -3,9 +3,14 @@
 //
 
 #include "Piece.h"
-namespace Gaming {
-    Agent::Agent(const Game &g, const Position &p, double energy) {
+#include "Agent.h"
 
+
+namespace Gaming {
+    const double Agent::AGENT_FATIGUE_RATE = 0.3;
+
+    Agent::Agent(const Game &g, const Position &p, double energy) : Piece(g, p, Game()) {
+        __energy = energy;
     }
 
     Agent::~Agent() {
@@ -17,20 +22,27 @@ namespace Gaming {
     }
 
     Piece &Agent::operator*(Piece &other) {
-        return <#initializer#>;
+        /* As Pieces move around the grid they run into others.
+         * Each time that happens there is an interaction taking place.
+         * This is captured by the pure virtual operator* (aka interaction operator)
+         * that Piece-s overload. The interactions are as follows:
+         * When an Agent moves onto a Resource, it consumes it completely.
+         * When an Agent moves onto an Agent, they compete and might either both die,
+         * or one dies and the other wins.
+         */
+
+
+        return *this;
     }
 
     Piece &Agent::interact(Agent *agent) {
-        return <#initializer#>;
+        return *this;
     }
 
     Piece &Agent::interact(Resource *resource) {
-        return <#initializer#>;
+        return *this;
     }
 
-    PieceType Agent::getType() const {
-        return INACCESSIBLE;
-    }
 
     ActionType Agent::takeTurn(const Surroundings &surr) const {
         return S;
@@ -38,5 +50,10 @@ namespace Gaming {
 
     void Agent::print(std::ostream &os) const {
 
+    }
+
+
+    PieceType Agent::getType() const {
+        return STRATEGIC;
     }
 }

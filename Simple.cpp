@@ -4,9 +4,12 @@
 
 #include <iosfwd>
 #include "Agent.h"
-#include "Gaming.h"
+
+#include "Simple.h"
 namespace Gaming {
-    Simple::Simple(const Game &g, const Position &p, double energy) {
+    const char Simple::SIMPLE_ID = 'S';
+    Simple::Simple(const Game &g, const Position &p, double energy)
+            : Agent( g, p, energy) {
 
     }
 
@@ -19,6 +22,7 @@ namespace Gaming {
     }
 
     ActionType Simple::takeTurn(const Surroundings &s) const {
+        Surroundings surr;
         return Agent::takeTurn(surr);
     }
 

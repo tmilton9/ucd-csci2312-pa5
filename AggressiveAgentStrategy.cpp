@@ -3,17 +3,21 @@
 //
 
 #include "Gaming.h"
+#include "AggressiveAgentStrategy.h"
+
+double STARTING_AGENT_ENERGY;
 namespace Gaming {
-    Gaming::AggressiveAgentStrategy::AggressiveAgentStrategy(double agentEnergy) {
+    const double AggressiveAgentStrategy::DEFAULT_AGGRESSION_THRESHOLD = STARTING_AGENT_ENERGY * 0.75;
+    AggressiveAgentStrategy::AggressiveAgentStrategy(double agentEnergy) {
 
     }
 
-    Gaming::AggressiveAgentStrategy::~AggressiveAgentStrategy() {
+    AggressiveAgentStrategy::~AggressiveAgentStrategy() {
 
     }
 
-    Gaming::ActionType Gaming::AggressiveAgentStrategy::operator()(
-            const ::Gaming::AggressiveAgentStrategy::Surroundings &s) const {
+    ActionType Gaming::AggressiveAgentStrategy::operator()(
+            const Surroundings &s) const {
         return S;
     }
 }

@@ -4,26 +4,31 @@
 
 #include <iosfwd>
 #include "Resource.h"
+#include "Advantage.h"
+
+
 namespace Gaming {
-    Gaming::Advantage(const ::Gaming::Game &g, const ::Gaming::Position &p,
-                                 double capacity) {
+    const char Advantage::ADVANTAGE_ID = 'D';
+    const double Advantage::ADVANTAGE_MULT_FACTOR = 2.0;
+
+    Advantage::Advantage(const Game &g, const Position &p, double capacity): Resource(g, p, capacity) {
 
     }
 
-    Gaming::~Advantage() {
+    Advantage::~Advantage() {
 
     }
 
-    void Gaming::print(std::ostream &os) const {
+    void Advantage::print(std::ostream &os) const {
 
     }
 
-    double Gaming::getCapacity() const {
-        return Resource::getCapacity();
+    double Advantage::getCapacity() const {
+        return getCapacity();
     }
 
-    double Gaming::consume() {
-        return Resource::consume();
+    double Advantage::consume() {
+        return consume();
     }
 
 

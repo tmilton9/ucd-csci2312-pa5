@@ -4,102 +4,110 @@
 
 #include "Game.h"
 namespace Gaming {
-    Gaming::Game::Game() {
+    const unsigned int Game::NUM_INIT_AGENT_FACTOR = 4;
+    const unsigned int Game::NUM_INIT_RESOURCE_FACTOR = 2;
+    const unsigned Game::MIN_WIDTH = 3;
+    const unsigned Game::MIN_HEIGHT = 3;
+    const double Game::STARTING_AGENT_ENERGY = 20;
+    const double Game::STARTING_RESOURCE_CAPACITY = 10;
+
+    Game::Game() {
 
     }
 
-    Gaming::Game::Game(unsigned width, unsigned height, bool manual) {
+    Game::Game(unsigned width, unsigned height, bool manual) {
 
     }
 
-    Gaming::Game::Game(const ::Gaming::Game::Game &another) {
+    Game::Game(const Game &another) {
 
     }
 
 
-    Gaming::Game::~Game() {
+    Game::~Game() {
 
     }
 
-    unsigned int Gaming::Game::getNumPieces() const {
+    unsigned int Game::getNumPieces() const {
      return 0;
     }
 
-    unsigned int Gaming::Game::getNumAgents() const {
+    unsigned int Game::getNumAgents() const {
      return 0;
     }
 
-    unsigned int Gaming::Game::getNumSimple() const {
+    unsigned int Game::getNumSimple() const {
      return 0;
     }
 
-    unsigned int Gaming::Game::getNumStrategic() const {
+    unsigned int Game::getNumStrategic() const {
      return 0;
     }
 
-    unsigned int Gaming::Game::getNumResources() {
+    unsigned int Game::getNumResources() {
      return 0;
     }
 
-    bool Gaming::Game::addSimple(const Position &position) {
+    bool Game::addSimple(const Position &position) {
      return false;
     }
 
-    bool Gaming::Game::addSimple(unsigned x, unsigned y) {
+    bool Game::addSimple(unsigned x, unsigned y) {
      return false;
     }
 
-    bool Gaming::Game::addStrategic(const Position &position, Strategy *s) {
+    bool Game::addStrategic(const Position &position, Strategy *s) {
      return false;
     }
 
-    bool Gaming::Game::addStrategic(unsigned x, unsigned y, Strategy *s) {
+    bool Game::addStrategic(unsigned x, unsigned y, Strategy *s) {
      return false;
     }
 
-    bool Gaming::Game::addFood(const Position &position) {
+    bool Game::addFood(const Position &position) {
      return false;
     }
 
-    bool Gaming::Game::addFood(unsigned x, unsigned y) {
+    bool Game::addFood(unsigned x, unsigned y) {
      return false;
     }
 
-    bool Gaming::Game::addAdvantage(const Position &position) {
+    bool Game::addAdvantage(const Position &position) {
      return false;
     }
 
-    bool Gaming::Game::addAdvantage(unsigned x, unsigned y) {
+    bool Game::addAdvantage(unsigned x, unsigned y) {
      return false;
     }
 
-    const Gaming::Surroundings Gaming::Game::getSurroundings(const Position &pos) const {
-     return Gaming::Surroundings();
+    const Surroundings Gaming::Game::getSurroundings(const Position &pos) const {
+     return Surroundings();
     }
 
-    const Gaming::ActionType Gaming::Game::reachSurroundings(const Position &from,
+    const ActionType Gaming::Game::reachSurroundings(const Position &from,
                                                              const Position &to) {
      return S;
     }
 
-    bool Gaming::Game::isLegal(const ActionType &ac, const Position &pos) const {
+    bool Game::isLegal(const ActionType &ac, const Position &pos) const {
      return false;
     }
 
-    const Gaming::Position Gaming::Game::move(const Position &pos,
+    const Position Gaming::Game::move(const Position &pos,
                                               const ActionType &ac) const {
-     return Gaming::Position();
+     return Position();
     }
 
-    void Gaming::Game::round() {
-
-    }
-
-    void Gaming::Game::populate() {
+    void Game::round() {
 
     }
 
-    void Gaming::Game::play(bool verbose) {
+    void Game::populate() {
 
     }
+
+    void Game::play(bool verbose) {
+
+    }
+
 }

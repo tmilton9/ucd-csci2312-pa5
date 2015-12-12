@@ -9,6 +9,7 @@
 
 #include "Game.h"
 
+
 namespace Gaming {
 
     class Resource;
@@ -16,6 +17,8 @@ namespace Gaming {
     class Piece {
 
     private:
+
+
         static unsigned int __idGen;
 
         bool __finished;
@@ -34,6 +37,7 @@ namespace Gaming {
 
     public:
         Piece(const Game &g, const Position &p, const Game &__game);
+
         virtual ~Piece();
 
         const Position getPosition() const { return __position; }

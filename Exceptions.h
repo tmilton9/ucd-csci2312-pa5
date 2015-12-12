@@ -23,6 +23,9 @@ namespace Gaming {
     protected:
         unsigned __exp_width, __exp_height, __width, __height;
     public:
+    protected:
+        virtual void __print_args(std::ostream &os) const;
+
         DimensionEx(unsigned expWidth, unsigned expHeight, unsigned width, unsigned height);
         unsigned getExpWidth() const;
         unsigned getExpHeight() const;

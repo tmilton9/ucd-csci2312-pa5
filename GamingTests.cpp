@@ -45,7 +45,7 @@ void test_piece_smoketest(ErrorContext &ec) {
         Game g;                         // note: Game smoke test is needed first
 
         Position p0(0, 0);
-        Simple s(g, p0, 10);
+        Simple s( g, p0, 10);
 
         Position p1(1, 0);
         Strategic t(g, p1, 20);
@@ -54,7 +54,7 @@ void test_piece_smoketest(ErrorContext &ec) {
         Food f(g, p2, 5);
 
         Position p3(0, 2);
-        Advantage a(g, p3, 3);
+        Advantage a( g, p3, 3);
     }
     ec.result(pass);
 }
@@ -81,10 +81,10 @@ void test_piece_print(ErrorContext &ec, unsigned int numRuns) {
             Strategic t(g, p1, 20);
 
             Position p2(2, 2);
-            Food f(g, p2, 5);
+            Food f( g, p2, 5);
 
             Position p3(0, 2);
-            Advantage a(g, p3, 3);
+            Advantage a( g, p3, 3);
 
             std::stringstream ss;
             ss << s << ' ' << t << ' ' << f << ' ' << a;
@@ -139,7 +139,7 @@ void test_piece_aging(ErrorContext &ec, unsigned int numRuns) {
             Food f(g, p2, 5);
 
             Position p3(0, 2);
-            Advantage a(g, p3, 3);
+            Advantage a( g, p3, 3);
 
             pass = s.isViable() &&
                    t.isViable() &&
@@ -161,10 +161,10 @@ void test_piece_aging(ErrorContext &ec, unsigned int numRuns) {
             Strategic t(g, p1, 20);
 
             Position p2(2, 2);
-            Food f(g, p2, 5);
+            Food f( g, p2, 5);
 
             Position p3(0, 2);
-            Advantage a(g, p3, 3);
+            Advantage a( g, p3, 3);
 
             Piece *pieces[] = { &s, &t, &f, &a };
 
@@ -203,8 +203,8 @@ void test_piece_energy(ErrorContext &ec, unsigned int numRuns) {
             Game g;
 
             Simple s(g, Position(0, 0), Game::STARTING_AGENT_ENERGY);
-            Food f(g, Position(1, 1), Game::STARTING_RESOURCE_CAPACITY);
-            Advantage a(g, Position(2, 2), Game::STARTING_RESOURCE_CAPACITY);
+            Food f( g, Position(1, 1), Game::STARTING_RESOURCE_CAPACITY);
+            Advantage a( g, Position(2, 2), Game::STARTING_RESOURCE_CAPACITY);
 
             Agent *agent = &s;
             Resource *r0 = &f, *r1 = &a;
@@ -319,7 +319,7 @@ void test_piece_turntaking(ErrorContext &ec, unsigned int numRuns) {
             Game g(3, 3);
 
             Food f(g, Position(0, 0), Game::STARTING_RESOURCE_CAPACITY);
-            Advantage a(g, Position(2, 1), Game::STARTING_RESOURCE_CAPACITY);
+            Advantage a( g, Position(2, 1), Game::STARTING_RESOURCE_CAPACITY);
 
             // create an upcast pointer to the agent for polymorphic turn taking
             Piece *piece[2] = { &f, &a };
@@ -624,7 +624,7 @@ void test_piece_interaction(ErrorContext &ec, unsigned int numRuns) {
             Game g;
 
             Food s0(g, Position(2, 0), Game::STARTING_RESOURCE_CAPACITY);
-            Food s1(g, Position(1, 1), Game::STARTING_RESOURCE_CAPACITY);
+            Food s1( g, Position(1, 1), Game::STARTING_RESOURCE_CAPACITY);
 
             Piece *pieces[2] = { &s0, &s1 };
             Piece &p0 = *pieces[0], &p1 = *pieces[1];

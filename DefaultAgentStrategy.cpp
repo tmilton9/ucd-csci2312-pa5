@@ -3,17 +3,18 @@
 //
 
 #include "Gaming.h"
+#include "DefaultAgentStrategy.h"
 namespace Gaming {
-    Gaming::DefaultAgentStrategy::DefaultAgentStrategy() {
+    DefaultAgentStrategy::DefaultAgentStrategy() {
 
     }
 
-    Gaming::DefaultAgentStrategy::~DefaultAgentStrategy() {
+    DefaultAgentStrategy::~DefaultAgentStrategy() {
 
     }
 
-    Gaming::ActionType Gaming::DefaultAgentStrategy::operator()(
-            const ::Gaming::DefaultAgentStrategy::Surroundings &s) const {
+    ActionType Gaming::DefaultAgentStrategy::operator()(
+            const Surroundings &s) const {
      return S;
     }
 }

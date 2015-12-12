@@ -22,9 +22,8 @@ namespace Gaming {
 
         virtual ActionType takeTurn(const Surroundings &surr) const override ;
 
-    protected:
-        virtual void print(std::ostream &os) const override ;
 
+        virtual void print(std::ostream &os) const override ;
         Agent(const Game &g, const Position &p, double energy);
         ~Agent();
 

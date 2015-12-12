@@ -2,47 +2,50 @@
 // Created by Travis Milton on 12/10/15.
 //
 
-#include "Gaming.h"
+
 #include "Piece.h"
+#include "Resource.h"
 namespace Gaming{
-Gaming::PieceType Gaming::Resource::getType() const {
-    return INACCESSIBLE;
+    const double Resource::RESOURCE_SPOIL_FACTOR = 1.2;
+
+PieceType Resource::getType() const {
+    return STRATEGIC;
 }
 
-Gaming::Resource::Resource(const ::Gaming::Resource::Game &g, const ::Gaming::Resource::Position &p,
-                           double __capacity) {
+Resource::Resource( const Game &g, const Position &p, double __capacity) : Piece(g, p, Game()) {
+    __capacity = __capacity;
 
 }
 
-Gaming::Resource::~Resource() {
+Resource::~Resource() {
 
 }
 
-double Gaming::Resource::consume() {
+double Resource::consume() {
     return 0;
 }
 
-void Gaming::Resource::age() {
+void Resource::age() {
 
 }
 
-Gaming::ActionType Gaming::Resource::takeTurn(const ::Gaming::Resource::Surroundings &s) const {
+ActionType Resource::takeTurn(const Surroundings &s) const {
     return S;
 }
 
-Gaming::Piece &Gaming::Resource::operator*(::Gaming::Resource::Piece &other) {
-    return <#initializer#>;
+Piece &Resource::operator*(Piece &other) {
+    return *this;
 }
 
-Gaming::Piece &Gaming::Resource::interact(::Gaming::Resource::Agent *agent) {
-    return <#initializer#>;
+Piece &Resource::interact(Agent *agent) {
+    return *this;
 }
 
-Gaming::Piece &Gaming::Resource::interact(::Gaming::Resource::Resource *resource) {
-    return <#initializer#>;
+Piece &Resource::interact(Resource *resource) {
+    return *this;
 }
 
-void Gaming::Resource::print(std::ostream &os) const {
+void Resource::print(std::ostream &os) const {
 
 }
 }

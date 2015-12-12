@@ -18,12 +18,11 @@ namespace Gaming {
     public:
         static const double RESOURCE_SPOIL_FACTOR;
 
-        virtual PieceType getType() const;
+        virtual PieceType getType() const override ;
 
-    protected:
-        virtual void print(std::ostream &os) const;
 
-        Resource(const Game &g, const Position &p, double __capacity);
+        virtual void print(std::ostream &os) const override ;
+        Resource( const Game &g, const Position &p, double __capacity);
         ~Resource();
 
         virtual double getCapacity() const { return __capacity; }
