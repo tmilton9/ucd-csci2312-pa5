@@ -17,7 +17,7 @@ namespace Gaming {
 
     }
 
-    void Simple::print(std::ostream &os) const {
+    void Simple::print(std::ostream &os) const {//TODO
         Agent::print(os);
     }
 

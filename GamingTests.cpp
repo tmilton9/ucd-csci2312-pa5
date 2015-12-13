@@ -88,11 +88,12 @@ void test_piece_print(ErrorContext &ec, unsigned int numRuns) {
 
             std::stringstream ss;
             ss << s << ' ' << t << ' ' << f << ' ' << a;
-
+			std::string ss1;
+			ss1 = ss.str();
             int id = 0;
             std::regex re("S[[:d:]]{1,}[ ]"); // ECMAScript, by default
             std::smatch m;
-            std::regex_search(ss.str(), m, re);
+            std::regex_search(ss1, m, re);
             if (m.size() != 1) { // parse problem
                 pass = false;
             } else {

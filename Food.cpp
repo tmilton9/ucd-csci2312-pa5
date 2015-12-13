@@ -15,7 +15,7 @@ namespace Gaming {
 
     }
 
-    void Food::print(std::ostream &os) const {
+    void Food::print(std::ostream &os) const { //TODO
       Resource::print(os);
     }
 }
