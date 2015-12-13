@@ -32,14 +32,18 @@ namespace Gaming {
         void populate(); // populate the grid (used in automatic random initialization of a Game)
 
         unsigned __numInitAgents, __numInitResources;
-
+        unsigned int numPositions = 0;
+        unsigned int numStrategic = 0;
+        unsigned int numSimple = 0;
+        unsigned int numAdvantages = 0;
+        unsigned int numFoods = 0;
         unsigned __width, __height;
         std::vector<Piece *> __grid; // if a position is empty, nullptr
 
         unsigned int __round;
 
         Status __status;
-
+        bool manual;
         bool __verbose;
 
     public:
@@ -73,7 +77,7 @@ namespace Gaming {
         bool addFood(unsigned x, unsigned y);
         bool addAdvantage(const Position &position);
         bool addAdvantage(unsigned x, unsigned y);
-        const Surroundings getSurroundings(const Position &pos) const;
+        const Surroundings getSurroundings() const;
 
         // gameplay methods
         static const ActionType reachSurroundings(const Position &from, const Position &to); // note: STAY by default

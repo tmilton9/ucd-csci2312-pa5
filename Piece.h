@@ -40,7 +40,7 @@ namespace Gaming {
 
         virtual ~Piece();
 
-        const Position getPosition() const { return __position; }
+        Position getPosition() const { return __position; }
         void setPosition(const Position &p) { __position = p; }
 
         bool getTurned() const { return __turned; }

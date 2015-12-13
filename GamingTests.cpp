@@ -96,10 +96,10 @@ void test_piece_print(ErrorContext &ec, unsigned int numRuns) {
             if (m.size() != 1) { // parse problem
                 pass = false;
             } else {
-                std::string matchStr(m[0]);
+                std::string matchStr((const std::allocator<char> &) m[0]);
                 std::regex r("[[:d:]]{1,}");
                 std::regex_search(matchStr, m, r);
-                id = stoi(m[0]);
+                id = stoi((const string &) m[0]);
                 pass = true;
             }
 
@@ -244,7 +244,7 @@ void test_piece_turntaking(ErrorContext &ec, unsigned int numRuns) {
             Piece *piece = &s;
 
             // get the Surroundings for the agent's position from the Game
-            Surroundings surr = g.getSurroundings(Position(1, 1));
+            Surroundings surr = g.getSurroundings();
 
             // call takeTurn on the Piece pointer to the agent
             ActionType action = piece->takeTurn(surr);
@@ -272,7 +272,7 @@ void test_piece_turntaking(ErrorContext &ec, unsigned int numRuns) {
             Piece *piece = &s;
 
             // get the Surroundings for the agent's position from the Game
-            Surroundings surr = g.getSurroundings(Position(0, 2));
+            Surroundings surr = g.getSurroundings();
 
             // call takeTurn on the Piece pointer to the agent
             ActionType action = piece->takeTurn(surr);
@@ -300,7 +300,7 @@ void test_piece_turntaking(ErrorContext &ec, unsigned int numRuns) {
             Piece *piece = &s;
 
             // get the Surroundings for the agent's position from the Game
-            Surroundings surr = g.getSurroundings(Position(0, 2));
+            Surroundings surr = g.getSurroundings();
 
             // call takeTurn on the Piece pointer to the agent
             ActionType action = piece->takeTurn(surr);
@@ -326,7 +326,7 @@ void test_piece_turntaking(ErrorContext &ec, unsigned int numRuns) {
 
             // get the Surroundings for a Piece's position
             Surroundings surr[2] =
-                    { g.getSurroundings(Position(0, 0)), g.getSurroundings(Position(2, 1)) };
+                    {g.getSurroundings(), g.getSurroundings()};
 
             // call takeTurn on the Piece pointer
             ActionType actions[2] =
@@ -353,7 +353,7 @@ void test_piece_turntaking(ErrorContext &ec, unsigned int numRuns) {
             Piece *piece = &s;
 
             // get the Surroundings for the agent's position from the Game
-            Surroundings surr = g.getSurroundings(Position(1, 1));
+            Surroundings surr = g.getSurroundings();
 
             // call takeTurn on the Piece pointer to the agent
             ActionType action = piece->takeTurn(surr);
@@ -383,7 +383,7 @@ void test_piece_turntaking(ErrorContext &ec, unsigned int numRuns) {
             Piece *piece = &s;
 
             // get the Surroundings for the agent's position from the Game
-            Surroundings surr = g.getSurroundings(Position(1, 1));
+            Surroundings surr = g.getSurroundings();
 
             // call takeTurn on the Piece pointer to the agent
             ActionType action = piece->takeTurn(surr);
@@ -418,7 +418,7 @@ void test_piece_turntaking(ErrorContext &ec, unsigned int numRuns) {
             Piece *piece = &s;
 
             // get the Surroundings for the agent's position from the Game
-            Surroundings surr = g.getSurroundings(Position(1, 1));
+            Surroundings surr = g.getSurroundings();
 
             // call takeTurn on the Piece pointer to the agent
             ActionType action = piece->takeTurn(surr);
@@ -448,7 +448,7 @@ void test_piece_turntaking(ErrorContext &ec, unsigned int numRuns) {
             Piece *piece = &s;
 
             // get the Surroundings for the agent's position from the Game
-            Surroundings surr = g.getSurroundings(Position(1, 1));
+            Surroundings surr = g.getSurroundings();
 
             // call takeTurn on the Piece pointer to the agent
             ActionType action = piece->takeTurn(surr);
@@ -480,7 +480,7 @@ void test_piece_turntaking(ErrorContext &ec, unsigned int numRuns) {
             Piece *piece = &s;
 
             // get the Surroundings for the agent's position from the Game
-            Surroundings surr = g.getSurroundings(Position(1, 1));
+            Surroundings surr = g.getSurroundings();
 
             // call takeTurn on the Piece pointer to the agent
             ActionType action = piece->takeTurn(surr);
@@ -512,7 +512,7 @@ void test_piece_turntaking(ErrorContext &ec, unsigned int numRuns) {
             Piece *piece = &s;
 
             // get the Surroundings for the agent's position from the Game
-            Surroundings surr = g.getSurroundings(Position(1, 1));
+            Surroundings surr = g.getSurroundings();
 
             // call takeTurn on the Piece pointer to the agent
             ActionType action = piece->takeTurn(surr);
@@ -543,7 +543,7 @@ void test_piece_turntaking(ErrorContext &ec, unsigned int numRuns) {
             Piece *piece = &s;
 
             // get the Surroundings for the agent's position from the Game
-            Surroundings surr = g.getSurroundings(Position(1, 1));
+            Surroundings surr = g.getSurroundings();
 
             // call takeTurn on the Piece pointer to the agent
             ActionType action = piece->takeTurn(surr);
@@ -680,7 +680,7 @@ void test_surroundings_smoketest(ErrorContext &ec) {
         g.addAdvantage(p3);
 
         // The surroundings of the simple agent
-        Surroundings surr = g.getSurroundings(p0);
+        Surroundings surr = g.getSurroundings();
         std::stringstream ss0;
         for (int i = 0; i < 9; i++)
             ss0 << surr.array[i] << ' ';
@@ -689,7 +689,7 @@ void test_surroundings_smoketest(ErrorContext &ec) {
         if (! pass) std::cout << ss0.str() << std::endl;
 
         // The surroundings of the strategic agent
-        surr = g.getSurroundings(p1);
+        surr = g.getSurroundings();
         std::stringstream ss1;
         for (int i = 0; i < 9; i++)
             ss1 << surr.array[i] << ' ';
@@ -718,7 +718,7 @@ void test_surroundings_smoketest(ErrorContext &ec) {
 
 
         // The surroundings of the simple agent at p0
-        Surroundings surr = g.getSurroundings(p0);
+        Surroundings surr = g.getSurroundings();
         std::stringstream ss0;
         for (int i = 0; i < 9; i++) ss0 << surr.array[i] << ' ';
 
@@ -727,7 +727,7 @@ void test_surroundings_smoketest(ErrorContext &ec) {
 
 
         // The surroundings of the strategic agent at p1
-        surr = g.getSurroundings(p1);
+        surr = g.getSurroundings();
         std::stringstream ss1;
         for (int i = 0; i < 9; i++)
             ss1 << surr.array[i] << ' ';
@@ -737,7 +737,7 @@ void test_surroundings_smoketest(ErrorContext &ec) {
 
 
         // The surroundings of the simple agent at p2
-        surr = g.getSurroundings(p2);
+        surr = g.getSurroundings();
         std::stringstream ss2;
         for (int i = 0; i < 9; i++)
             ss2 << surr.array[i] << ' ';
@@ -747,7 +747,7 @@ void test_surroundings_smoketest(ErrorContext &ec) {
 
 
         // The surroundings of the strategic agent at p3
-        surr = g.getSurroundings(p3);
+        surr = g.getSurroundings();
         std::stringstream ss3;
         for (int i = 0; i < 9; i++)
             ss3 << surr.array[i] << ' ';

@@ -8,12 +8,9 @@
 namespace Gaming{
     const double Resource::RESOURCE_SPOIL_FACTOR = 1.2;
 
-PieceType Resource::getType() const {
-    return STRATEGIC;
-}
 
-Resource::Resource( const Game &g, const Position &p, double __capacity) : Piece(g, p, Game()) {
-    __capacity = __capacity;
+Resource::Resource( const Game &g, const Position &p, double capacity) : Piece(g, p, Game(g)) {
+    __capacity = capacity;
 
 }
 
@@ -22,11 +19,12 @@ Resource::~Resource() {
 }
 
 double Resource::consume() {
-    return 0;
+    finish();
+    return __capacity;
 }
 
 void Resource::age() {
-
+    __capacity = __capacity/RESOURCE_SPOIL_FACTOR;
 }
 
 ActionType Resource::takeTurn(const Surroundings &s) const {
@@ -45,7 +43,5 @@ Piece &Resource::interact(Resource *resource) {
     return *this;
 }
 
-void Resource::print(std::ostream &os) const {
 
-}
 }

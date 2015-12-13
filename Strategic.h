@@ -22,7 +22,7 @@ namespace Gaming {
 
         Strategic(const Game &g, const Position &p, double energy, Strategy *s = new DefaultAgentStrategy());
         ~Strategic();
-
+        double Agg;
         PieceType getType() const override { return PieceType::STRATEGIC; }
 
         void print(std::ostream &os) const override;

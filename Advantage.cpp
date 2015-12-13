@@ -24,11 +24,12 @@ namespace Gaming {
     }
 
     double Advantage::getCapacity() const {
-        return getCapacity();
+        return __capacity;
     }
 
     double Advantage::consume() {
-        return consume();
+        Piece::finish();
+        return ADVANTAGE_MULT_FACTOR;
     }
 
 
