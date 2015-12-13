@@ -19,7 +19,7 @@ namespace Gaming {
 
     }
 
-    void Strategic::print(std::ostream &os) const {
+    void Strategic::print(std::ostream &os) const {//TODO
         Agent::print(os);
     }
 

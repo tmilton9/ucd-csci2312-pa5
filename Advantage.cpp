@@ -19,7 +19,7 @@ namespace Gaming {
 
     }
 
-    void Advantage::print(std::ostream &os) const {
+    void Advantage::print(std::ostream &os) const { //TODO
 
     }
 

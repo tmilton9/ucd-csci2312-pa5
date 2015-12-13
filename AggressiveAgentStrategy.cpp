@@ -6,7 +6,7 @@
 #include "AggressiveAgentStrategy.h"
 #include "Game.h"
 #include "Piece.h"
-#include ""
+
 
 double STARTING_AGENT_ENERGY;
 namespace Gaming {
@@ -21,8 +21,8 @@ namespace Gaming {
     }
 
     ActionType Gaming::AggressiveAgentStrategy::operator()(const Surroundings &s) const {
-       ActionType A;
+       
 
-        return A;
+        return N;
     }
 }

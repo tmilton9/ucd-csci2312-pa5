@@ -23,7 +23,7 @@ namespace Gaming {
         __round = 0;
         __numInitAgents = (__width * __height) / NUM_INIT_AGENT_FACTOR;
         __numInitResources = (__width * __height) / NUM_INIT_RESOURCE_FACTOR;
-        __grid = nullptr;
+        __grid;
         manual = true;
         __verbose = false;
 
@@ -36,7 +36,7 @@ namespace Gaming {
         __round = 0;
         __numInitAgents = (__width * __height) / NUM_INIT_AGENT_FACTOR;
         __numInitResources = (__width * __height) / NUM_INIT_RESOURCE_FACTOR;
-        __grid = nullptr;
+        __grid;
         __verbose = false;
         if (!manual){
             populate();
@@ -56,7 +56,7 @@ namespace Gaming {
 
 
     Game::~Game() {
-        delete __grid;
+        
     }
 
     unsigned int Game::getNumPieces() const {
@@ -249,7 +249,7 @@ namespace Gaming {
     void Game::populate() {
         if (!manual) {
             numPositions = __height * __width;
-            for (int j = 0; j < numPositions; ++j) {
+            for (unsigned int j = 0; j < numPositions; ++j) {
                 __grid.push_back(nullptr);
             }
             unsigned int numStrategicP = __numInitAgents / 2;
@@ -306,7 +306,7 @@ namespace Gaming {
         }
         if (manual) {
             numPositions = __height * __width;
-            for (int j = 0; j < numPositions; ++j) {
+            for (unsigned int j = 0; j < numPositions; ++j) {
                 __grid.push_back(nullptr);
             }
 

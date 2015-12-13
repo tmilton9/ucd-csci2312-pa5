@@ -15,7 +15,7 @@ Gaming::Piece::~Piece() {
 
 }
 
-    std::ostream &operator<<(std::ostream &os, const Piece &piece) {
+    std::ostream &operator<<(std::ostream &os, const Piece &piece) {//TODO
         return os;
     }
 }
