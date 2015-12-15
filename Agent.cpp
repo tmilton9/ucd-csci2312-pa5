@@ -21,7 +21,8 @@ namespace Gaming {
     }
 
     void Agent::age() {
-        __energy = __energy/AGENT_FATIGUE_RATE;
+        this->__energy =   AGENT_FATIGUE_RATE /   this->__energy;
+        if (__energy < 2){finish();}
     }
 
     Piece &Agent::operator*(Piece &other) {
@@ -64,22 +65,23 @@ namespace Gaming {
 
     Piece &Agent::interact(Agent *agent) {
         this->__energy -= agent->__energy;
-        if(__energy > 0){
+        if(this->__energy > 0){
             this->setPosition(agent->getPosition());
             if (agent->__energy <= 0){
                 agent->finish(); }
-        return *this;}
-        if(__energy <= 0){
-            Piece::finish();
-            return *this;
         }
+        if(this->__energy <= 0){
+            finish();
+
+        }
+        return *this;
     }
 
     Piece &Agent::interact(Resource *resource) {
         if(resource->getType() == FOOD)  {
-        __energy += resource->consume();}
+        addEnergy(resource->consume()); }
         if(resource->getType() == ADVANTAGE){
-            __energy = __energy * resource->consume(); }
+            addEnergy(this->__energy * resource->consume()); }
         this->setPosition(resource->getPosition());
         return *this;
     }

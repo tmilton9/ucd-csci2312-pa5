@@ -11,7 +11,8 @@ namespace Gaming {
     const char Advantage::ADVANTAGE_ID = 'D';
     const double Advantage::ADVANTAGE_MULT_FACTOR = 2.0;
 
-    Advantage::Advantage(const Game &g, const Position &p, double capacity): Resource(g, p, capacity) {
+    Advantage::Advantage(const Game &g, const Position &p, double capacity):Resource(g, p, capacity) {
+          __capacity = capacity *ADVANTAGE_MULT_FACTOR;
 
     }
 
@@ -19,7 +20,17 @@ namespace Gaming {
 
     }
 
+    //************************************
+    // Method:    print
+    // FullName:  Gaming::Advantage::print
+    // Access:    public 
+    // Returns:   void
+    // Qualifier: const
+    // Parameter: std::ostream & os
+    //************************************
     void Advantage::print(std::ostream &os) const { //TODO
+		
+		os << ADVANTAGE_ID << __id;
 
     }
 

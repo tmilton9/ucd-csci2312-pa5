@@ -24,11 +24,12 @@ double Resource::consume() {
 }
 
 void Resource::age() {
-    __capacity = __capacity/RESOURCE_SPOIL_FACTOR;
+    this->__capacity = this->__capacity / RESOURCE_SPOIL_FACTOR;
+    if (this->__capacity < 2){finish();}
 }
 
 ActionType Resource::takeTurn(const Surroundings &s) const {
-    return S;
+    return STAY;
 }
 
 Piece &Resource::operator*(Piece &other) {
@@ -36,6 +37,8 @@ Piece &Resource::operator*(Piece &other) {
 }
 
 Piece &Resource::interact(Agent *agent) {
+
+
     return *this;
 }
 

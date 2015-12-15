@@ -9,8 +9,8 @@
 #include "Game.h"
 namespace Gaming {
     const char Simple::SIMPLE_ID = 'S';
-    Simple::Simple(const Game &g, const Position &p, double energy)
-            : Agent( g, p, energy) {
+    Simple::Simple(const Game &g, const Position &p, double energy): Agent( g, p, energy)
+             {
     }
 
     Simple::~Simple() {
@@ -18,7 +18,9 @@ namespace Gaming {
     }
 
     void Simple::print(std::ostream &os) const {//TODO
-        Agent::print(os);
+		os << this->SIMPLE_ID << this->__id;
+
+        
     }
 
     ActionType Simple::takeTurn(const Surroundings &s) const {
@@ -28,7 +30,7 @@ namespace Gaming {
 
         while (!good) {
             P = __game.randomPosition((const std::vector<int> &) s.array);
-            A = __game.reachSurroundings(this->getPosition(), P);
+            A = __game.reachSurroundings(getPosition(), P);
             switch (A) {
                 case N: {
                     if (s.array[1] == ADVANTAGE){good = true;}
@@ -86,9 +88,11 @@ namespace Gaming {
                         if (s.array[7] != SIMPLE) { good = true; }
                     }break;
                 }
-                case STAY:
-                    good = true;
+
+                case STAY:{
+
                     break;
+                }
             }
 
 

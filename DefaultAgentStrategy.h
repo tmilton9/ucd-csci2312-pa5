@@ -8,15 +8,13 @@
 #include "Strategy.h"
 
 namespace Gaming {
+	class DefaultAgentStrategy : public Strategy {
+	public:
 
-    class DefaultAgentStrategy : public Strategy {
-    public:
-
-        DefaultAgentStrategy();
-        ~DefaultAgentStrategy();
-        ActionType operator()(const Surroundings &s) const override;
-    };
-
+		DefaultAgentStrategy();
+		~DefaultAgentStrategy();
+		ActionType operator()(const Surroundings &s) const override;
+	};
 }
 
 #endif //PA5GAME_DEFAULTAGENTSTRATEGY_H

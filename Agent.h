@@ -9,34 +9,27 @@
 #include "Piece.h"
 
 namespace Gaming {
+	class Agent : public Piece {
+	protected:
+		double __energy;
 
-    class Agent : public Piece {
+	public:
+		static const double AGENT_FATIGUE_RATE;
 
-    protected:
-        double __energy;
+		Agent(const Game &g, const Position &p, double energy);
+		~Agent();
 
-    public:
-        static const double AGENT_FATIGUE_RATE;
+		double getEnergy() const { return __energy; }
+		void addEnergy(double e) { __energy += e; }
 
+		void age() override final;
 
+		bool isViable() const override final { return !isFinished(); }
 
-        Agent(const Game &g, const Position &p, double energy);
-        ~Agent();
-
-        double getEnergy() const { return __energy; }
-        void addEnergy(double e) { __energy += e; }
-
-        void age() override final;
-
-        bool isViable() const override final { return !isFinished() && __energy > 0.0; }
-
-        Piece &operator*(Piece &other) override final;
-        Piece &interact(Agent *) override final;
-        Piece &interact(Resource *) override final;
-
-    };
-
+		Piece &operator*(Piece &other) override final;
+		Piece &interact(Agent *) override final;
+		Piece &interact(Resource *) override final;
+	};
 }
-
 
 #endif //PA5GAME_AGENT_H

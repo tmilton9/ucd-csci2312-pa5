@@ -1,3 +1,4 @@
+
 //
 // Created by Travis Milton on 12/10/15.
 //
@@ -16,6 +17,8 @@ namespace Gaming {
     }
 
     void Food::print(std::ostream &os) const { //TODO
-      Resource::print(os);
+
+		os << FOOD_ID << __id;
+
     }
 }

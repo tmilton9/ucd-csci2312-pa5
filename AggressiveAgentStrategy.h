@@ -8,20 +8,16 @@
 #include "Strategy.h"
 
 namespace Gaming {
+	class AggressiveAgentStrategy : public Strategy {
+		double __agentEnergy;
 
-    class AggressiveAgentStrategy : public Strategy {
-        double __agentEnergy;
+	public:
+		static const double DEFAULT_AGGRESSION_THRESHOLD;
 
-    public:
-        static const double DEFAULT_AGGRESSION_THRESHOLD;
-
-        AggressiveAgentStrategy(double agentEnergy);
-        ~AggressiveAgentStrategy();
-        ActionType operator()(const Surroundings &s) const override;
-
-    };
-
+		AggressiveAgentStrategy(double agentEnergy);
+		~AggressiveAgentStrategy();
+		ActionType operator()(const Surroundings &s) const override;
+	};
 }
-
 
 #endif //PA5GAME_AGGRESSIVEAGENTSTRATEGY_H
