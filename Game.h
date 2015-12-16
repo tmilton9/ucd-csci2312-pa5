@@ -53,7 +53,7 @@ namespace Gaming {
         static const unsigned MIN_WIDTH, MIN_HEIGHT;
         static const double STARTING_AGENT_ENERGY;
         static const double STARTING_RESOURCE_CAPACITY;
-        Position T;
+
         Game();
         Game(unsigned width, unsigned height, bool manual1); // note: manual population by default
         Game(const Game &another);
@@ -110,19 +110,29 @@ namespace Gaming {
         // Status: Over!
         //
         friend std::ostream &operator<<(std::ostream &os, const Game &game){
-
+          /*
+           os << "Round: " << static_cast<char>(game.__round);
+            for (int j = 0; j < game.__height; ++j) {
+                for (int j = 0; j < game.__height; ++j) {
+                os << "[" <<  game.__grid[j] << "]";
+            }
+                os << "\n";
+            }
+            os << "Status "<< static_cast<char>(game.__status);
+*/
             std::stringstream ss;
-            //ss << "Round: " << static_cast<char>(game.__round);
+            ss << "Round: " << static_cast<char>(game.__round);
             for (int j = 0; j < game.__grid.size(); ++j) {
                 ss << game.__grid[j] <<  ' ' ;
             }
-            //ss << "Status "<< static_cast<char>(game.__status);
+            ss << "Status "<< static_cast<char>(game.__status);
             std::regex re("S[[:d:]]{1,}[ ]"); // ECMAScript, by default
             std::smatch m;
             std::string ss1;
             ss1 = ss.str();
             std::regex_search(ss1, m, re);
             os << ss1;
+
             return os;
         };
     };

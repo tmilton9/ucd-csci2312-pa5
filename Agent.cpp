@@ -21,7 +21,7 @@ namespace Gaming {
     }
 
     void Agent::age() {
-        this->__energy =   AGENT_FATIGUE_RATE /   this->__energy;
+        this->__energy =   this->__energy/AGENT_FATIGUE_RATE;
         if (__energy < 2){finish();}
     }
 

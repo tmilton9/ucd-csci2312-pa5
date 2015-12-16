@@ -3,26 +3,21 @@
 //
 #include "Piece.h"
 
-namespace Gaming
-{
+namespace Gaming {
     std::vector<Piece *> __grid;
- unsigned int Piece::__idGen = 0;
-Piece::Piece(const Game &g, const Position &p, const Game &__game) : __game(__game) {
+    unsigned int Piece::__idGen = 0;
 
-    __position = p;
-	__id = __idGen++;
-    __turned = false;
-    __finished = false;
+    Piece::Piece(const Game &g, const Position &p, const Game &__game) : __game(g) {
 
-}
+        __position = p;
+        __id = __idGen++;
+        __turned = false;
+        __finished = false;
 
-Gaming::Piece::~Piece() {
+    }
 
-}
+    Gaming::Piece::~Piece() {
 
-    std::ostream &operator<<(std::ostream &os, const Piece &piece) {//TODO
-        piece.print(os);
-
-        return os;
     }
 }
+    //std::ostream &operator<<(std::ostream &os, const Piece &piece)

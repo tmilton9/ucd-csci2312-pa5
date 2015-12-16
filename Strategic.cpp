@@ -20,7 +20,7 @@ namespace Gaming {
 	}
 
 	void Strategic::print(std::ostream &os) const {//TODO
-		os << this->STRATEGIC_ID << this->__id;
+		os << STRATEGIC_ID << __id;
 
 
 	}

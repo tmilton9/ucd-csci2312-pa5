@@ -5,6 +5,7 @@
 #include <iostream>
 #include <cassert>
 #include <regex>
+#include <sstream>
 
 #include "GamingTests.h"
 #include "ErrorContext.h"
@@ -83,7 +84,7 @@ void test_piece_print(ErrorContext &ec, unsigned int numRuns) {
 
 			std::stringstream ss;
 			ss << s << ' ' << t << ' ' << f << ' ' << a;
-			std::string ss1;
+			std::string  ss1;
 			ss1 = ss.str();
 			int id = 0;
 			std::regex re("S[[:d:]]{1,}[ ]"); // ECMAScript, by default
@@ -96,7 +97,7 @@ void test_piece_print(ErrorContext &ec, unsigned int numRuns) {
 				std::string matchStr((const std::allocator<char> &) m[0]);
 				std::regex r("[[:d:]]{1,}");
 				std::regex_search(matchStr, m, r);
-				id = stoi((const string &)m[0]);
+				std::istringstream(m[0]) >> id;
 				pass = true;
 			}
 
