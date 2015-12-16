@@ -12,24 +12,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4b0cbe21-ceb0-4c75-9358-3c068ad37791" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.vs/Pa5.2/v14/.suo" afterPath="$PROJECT_DIR$/.vs/Pa5.2/v14/.suo" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/x64/Debug/Pa5.2.pdb" afterPath="$PROJECT_DIR$/x64/Debug/Pa5.2.pdb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/x64/Debug/vc140.idb" afterPath="$PROJECT_DIR$/x64/Debug/vc140.idb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/x64/Debug/vc140.pdb" afterPath="$PROJECT_DIR$/x64/Debug/vc140.pdb" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Agent.cpp" afterPath="$PROJECT_DIR$/Agent.cpp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/AggressiveAgentStrategy.cpp" afterPath="$PROJECT_DIR$/AggressiveAgentStrategy.cpp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/DefaultAgentStrategy.cpp" afterPath="$PROJECT_DIR$/DefaultAgentStrategy.cpp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Game.cpp" afterPath="$PROJECT_DIR$/Game.cpp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Gaming.h" afterPath="$PROJECT_DIR$/Gaming.h" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Piece.cpp" afterPath="$PROJECT_DIR$/Piece.cpp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Piece.h" afterPath="$PROJECT_DIR$/Piece.h" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Resource.cpp" afterPath="$PROJECT_DIR$/Resource.cpp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Simple.cpp" afterPath="$PROJECT_DIR$/Simple.cpp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/main.cpp" afterPath="$PROJECT_DIR$/main.cpp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/x64/Debug/Pa5.2.log" afterPath="$PROJECT_DIR$/x64/Debug/Pa5.2.log" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/x64/Debug/Pa5.2.tlog/CL.read.1.tlog" afterPath="$PROJECT_DIR$/x64/Debug/Pa5.2.tlog/CL.read.1.tlog" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/x64/Debug/Pa5.2.tlog/CL.write.1.tlog" afterPath="$PROJECT_DIR$/x64/Debug/Pa5.2.tlog/CL.write.1.tlog" />
     </list>
     <ignored path="ucd-csci2312-pa5.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -105,7 +88,7 @@
       <file leaf-file-name="Game.cpp" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Game.cpp">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.45045045">
+            <state vertical-scroll-proportion="0.41841003">
               <caret line="165" column="27" selection-start-line="165" selection-start-column="27" selection-end-line="165" selection-end-column="27" />
               <folding>
                 <element signature="e#48#65#0" expanded="true" />
@@ -304,7 +287,13 @@
       <option name="project" value="LOCAL" />
       <updated>1450212889889</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="working on surroundings smoke test">
+      <created>1450243071892</created>
+      <option name="number" value="00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1450243071892</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TodoView">
@@ -318,15 +307,15 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1280" height="800" extended-state="0" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24861" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.28551137" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.28125" sideWeight="0.49577168" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.28125" sideWeight="0.49577168" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="CMake" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33931485" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32954547" sideWeight="0.50422835" order="8" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32952693" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32954547" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32954547" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2494043" sideWeight="0.4943182" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32954547" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2494043" sideWeight="0.5056818" order="2" side_tool="true" content_ui="tabs" />
@@ -353,7 +342,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="no warnings no errors//no working print" />
-    <option name="LAST_COMMIT_MESSAGE" value="no warnings no errors//no working print" />
+    <MESSAGE value="working on surroundings smoke test" />
+    <option name="LAST_COMMIT_MESSAGE" value="working on surroundings smoke test" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -527,6 +517,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="8" column="0" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -549,6 +540,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="117" column="0" selection-start-line="117" selection-start-column="0" selection-end-line="117" selection-end-column="0" />
+          <folding>
+            <element signature="e#48#67#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -766,7 +760,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Game.cpp">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.45045045">
+        <state vertical-scroll-proportion="0.41841003">
           <caret line="165" column="27" selection-start-line="165" selection-start-column="27" selection-end-line="165" selection-end-column="27" />
           <folding>
             <element signature="e#48#65#0" expanded="true" />
