@@ -4,7 +4,7 @@
 
 #include "Gaming.h"
 #include "DefaultAgentStrategy.h"
-#include <iterator>
+
 namespace Gaming {
     DefaultAgentStrategy::DefaultAgentStrategy() {
     }

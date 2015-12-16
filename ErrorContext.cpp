@@ -12,13 +12,7 @@
  * Acknowledgement: Donnie Pinkston, CALTECH
  */
 
-#include <cassert>
-#include <cstdlib>
-#include <iostream>
-#include <sstream>
-#include <set>
 
-#include "ErrorContext.h"
 
 using std::string;
 using std::ios;

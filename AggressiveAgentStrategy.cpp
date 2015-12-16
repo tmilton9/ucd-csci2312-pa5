@@ -5,7 +5,7 @@
 #include "Gaming.h"
 #include "AggressiveAgentStrategy.h"
 #include "Game.h"
-#include "Piece.h"
+
 
 double STARTING_AGENT_ENERGY;
 namespace Gaming {

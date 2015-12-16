@@ -6,8 +6,7 @@
 #include "Agent.h"
 
 #include "Strategic.h"
-#include "DefaultAgentStrategy.h"
-#include "AggressiveAgentStrategy.h"
+
 namespace Gaming {
 	const char Strategic::STRATEGIC_ID = 'T';
 	Strategic::Strategic(const Game &g, const Position &p, double energy, Strategy *s) : Agent(g, p, energy) {
