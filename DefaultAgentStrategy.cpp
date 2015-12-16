@@ -26,7 +26,7 @@ namespace Gaming {
 		ActionType A;
 
 
-				for (std::array<PieceType, 9>::const_pointer it = s.array.begin(); it != s.array.end(); ++it) {
+				for (std::array<PieceType,9>::const_iterator it = s.array.begin(); it != s.array.end(); ++it) {
                     if (!good){
 					if (*it == ADVANTAGE) {
 						if (s.array[1] == ADVANTAGE) {A = N; good = true; break;}
@@ -41,7 +41,7 @@ namespace Gaming {
                     }
 				}
         if (!good) {
-            for (std::array<PieceType, 9>::const_pointer it = s.array.begin(); it != s.array.end(); ++it) {
+            for (std::array<PieceType,9>::const_iterator it = s.array.begin(); it != s.array.end(); ++it) {
                 if (!good) {
                     if (s.array[*it] == FOOD) {
 
@@ -91,7 +91,7 @@ namespace Gaming {
             }
         }
         if(!good){
-				for (std::array<PieceType, 9>::const_pointer it = s.array.begin(); it != s.array.end(); ++it) {
+				for (std::array<PieceType, 9>::const_iterator it = s.array.begin(); it != s.array.end(); ++it) {
 					if (!good)
 					{
 						if (s.array[*it] == SIMPLE) {

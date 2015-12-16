@@ -18,7 +18,7 @@ namespace Gaming {
     }
 
     void Simple::print(std::ostream &os) const {//TODO
-		os << this->SIMPLE_ID << this->__id;
+		os << SIMPLE_ID << __id;
 
         
     }

@@ -1,3 +1,14 @@
-﻿  Piece.cpp
+﻿  Resource.cpp
+  Game.cpp
+  Agent.cpp
+  Generating Code...
+  Skipping... (no relevant changes detected)
+  Strategic.cpp
+  Simple.cpp
+  Piece.cpp
+  GamingTests.cpp
+  Food.cpp
+  AggressiveAgentStrategy.cpp
+  Advantage.cpp
   Pa5.2.vcxproj -> Y:\Documents\ucd-csci2312-pa5\x64\Debug\Pa5.2.exe
   Pa5.2.vcxproj -> Y:\Documents\ucd-csci2312-pa5\x64\Debug\Pa5.2.pdb (Partial PDB)

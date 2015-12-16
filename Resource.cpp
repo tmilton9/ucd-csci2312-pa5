@@ -24,8 +24,8 @@ double Resource::consume() {
 }
 
 void Resource::age() {
-    this->__capacity = this->__capacity / RESOURCE_SPOIL_FACTOR;
-    if (this->__capacity < 2){finish();}
+    __capacity = __capacity - RESOURCE_SPOIL_FACTOR ;
+    if (__capacity < 2){finish();}
 }
 
 ActionType Resource::takeTurn(const Surroundings &s) const {

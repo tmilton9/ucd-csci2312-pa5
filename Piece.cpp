@@ -10,6 +10,7 @@ namespace Gaming {
     Piece::Piece(const Game &g, const Position &p, const Game &__game) : __game(g) {
 
         __position = p;
+        __id = 0;
         __id = __idGen++;
         __turned = false;
         __finished = false;
@@ -17,7 +18,7 @@ namespace Gaming {
     }
 
     Gaming::Piece::~Piece() {
-
+        __idGen--;
     }
 }
     //std::ostream &operator<<(std::ostream &os, const Piece &piece)

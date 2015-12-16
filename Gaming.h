@@ -20,7 +20,7 @@ namespace Gaming {
 	enum ActionType { N = 0, NE, NW, E, W, SE, SW, S, STAY };
 
 	// what a position on the game grid can be filled with
-	enum PieceType { SIMPLE = 0, STRATEGIC, FOOD, ADVANTAGE, INACCESSIBLE, SELF, EMPTY };
+	enum PieceType { SIMPLE = 0, STRATEGIC = 1, FOOD = 2, ADVANTAGE = 3, INACCESSIBLE = 4, SELF = 5, EMPTY = 6 };
 
 	// a "map" of the 8 squares adjacent to a piece
 	struct Surroundings {

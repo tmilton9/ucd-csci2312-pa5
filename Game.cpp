@@ -29,21 +29,9 @@ namespace Gaming {
 		__numInitResources = (__width * __height) / NUM_INIT_RESOURCE_FACTOR;
 		manual = true;
 		__verbose = false;
+		__grid;
 
-		for (int i = 0; i < (__width); ++i) {
 
-			for (int k = 0; k < __height; ++k)
-			{
-			
-			Position p;
-			p.x= k;
-			p.y= i;
-			Food * j(nullptr, &p ,0);
-			__grid.push_back(j);
-			}
-		
-			
-		}
 
 
 
@@ -59,9 +47,7 @@ namespace Gaming {
 		__numInitAgents = (__width * __height) / NUM_INIT_AGENT_FACTOR;
 		__numInitResources = (__width * __height) / NUM_INIT_RESOURCE_FACTOR;
 		manual = manual1;
-		for (int i = 0; i < (__height * __width); ++i) {
-			__grid.push_back(0);
-		}
+
 	}
 
 	Game::Game(const Game &another) {
@@ -76,6 +62,7 @@ namespace Gaming {
 	}
 
 	Game::~Game() {
+
 	}
 
 	unsigned int Game::getNumPieces() const {
@@ -111,7 +98,7 @@ namespace Gaming {
 
 	bool Game::addSimple(const Position &position) {
 		Piece *P = new Simple(*this, position, STARTING_AGENT_ENERGY);
-		__grid[position.x * __width + position.y] = P;
+		__grid.assign(position.x * __width + position.y, P);
 		numStrategic++;
 		return true;
 	}
@@ -119,14 +106,14 @@ namespace Gaming {
 	bool Game::addSimple(unsigned x, unsigned y) {
 		Position position(x, y);
 		Simple *P = new Simple(*this, position, STARTING_AGENT_ENERGY) ;
-		__grid[position.x * __width + position.y] = P;
+		__grid.assign(position.x * __width + position.y, P);
 		numStrategic++;
 		return true;
 	}
 
 	bool Game::addStrategic(const Position &position, Strategy *s) {
 		Strategic * P = new Strategic(*this, position, STARTING_AGENT_ENERGY, s);
-		__grid[position.x * __width + position.y] = P;
+		__grid.assign(position.x * __width + position.y, P);
 		numStrategic++;
 		return true;
 	}
@@ -134,14 +121,14 @@ namespace Gaming {
 	bool Game::addStrategic(unsigned x, unsigned y, Strategy *s) {
 		Position position(x, y);
 		Strategic * P = new Strategic(*this, position, STARTING_AGENT_ENERGY, s);
-		__grid[position.x * __width + position.y] = P;
+		__grid.assign(position.x * __width + position.y, P);
 		numStrategic++;
 		return true;
 	}
 
 	bool Game::addFood(const Position &position) {
 		Food * P = new Food(*this, position, STARTING_RESOURCE_CAPACITY);
-		__grid[position.x * __width + position.y] = P;
+		__grid.assign(position.x * __width + position.y, P);
 		numFoods++;
 		return true;
 	}
@@ -149,14 +136,14 @@ namespace Gaming {
 	bool Game::addFood(unsigned x, unsigned y) {
 		Position position(x, y);
 		Food * P = new Food(*this, position, STARTING_RESOURCE_CAPACITY);
-		__grid[position.x * __width + position.y] = P;
+		__grid.assign(position.x * __width + position.y, P);
 		numFoods++;
 		return true;
 	}
 
 	bool Game::addAdvantage(const Position &position) {
 		Advantage * P = new Advantage(*this, position, STARTING_RESOURCE_CAPACITY);
-		__grid[position.x * __width + position.y] = P;
+		__grid.assign(position.x * __width + position.y, P);
 		numAdvantages++;
 		return true;
 	}
@@ -164,26 +151,25 @@ namespace Gaming {
 	bool Game::addAdvantage(unsigned x, unsigned y) {
 		Position position(x, y);
 		Advantage * P = new Advantage(*this, position, STARTING_RESOURCE_CAPACITY);
-		__grid[position.x * __width + position.y] = P;
+		__grid.assign(position.x * __width + position.y, P);
 		numAdvantages++;
 		return true;
 	}
 
 	const Surroundings Gaming::Game::getSurroundings() const {
 		Surroundings Su;
-		for(int i = 0; i < 9;++i){
-			if(__grid[i]->getType() == ADVANTAGE)
-				Su.array[i] = __grid[i]->getType();
-			if(__grid[i]->getType() == FOOD)
-				Su.array[i] = __grid[i]->getType();
-			if(__grid[i]->getType() == SIMPLE)
-				Su.array[i] = __grid[i]->getType();
-			if(__grid[i]->getType() == STRATEGIC)
-				Su.array[i] = __grid[i]->getType();
-			if(__grid[i]->getType() == SELF)
-				Su.array[i] = __grid[i]->getType();
-
-
+		int num , num1 = 0;
+		Su.array[4] = __grid[0]->getType();
+		Position Mid = __grid[0]->getPosition();
+		num1 = Mid.x  * __width + Mid.y;
+		for (int i = 0; i< 9; ++i){
+			num = i - num1;
+			if( num < 0 || num > 8){
+				Su.array[i] = INACCESSIBLE;
+			}
+			else if (__grid[num]->isViable())
+				Su.array[i] = __grid[num]->getType();
+			else Su.array[i] = EMPTY;
 		}
 		return Su;
 	}

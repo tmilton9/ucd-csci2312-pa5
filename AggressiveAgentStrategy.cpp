@@ -23,7 +23,7 @@ namespace Gaming {
 		ActionType A;
 
 			if (__agentEnergy > DEFAULT_AGGRESSION_THRESHOLD) {
-				for (std::array<PieceType, 9>::const_pointer it = s.array.begin(); it != s.array.end(); ++it) {
+				for (std::array<PieceType, 9>::const_iterator it = s.array.begin(); it != s.array.end(); ++it) {
 					if(!good){
 					if (s.array[*it] == STRATEGIC) {
 						if (s.array[1] == STRATEGIC) { A = N; good = true; break;}
@@ -39,7 +39,7 @@ namespace Gaming {
 				}
 				if (!good){
 				
-				for (std::array<PieceType, 9>::const_pointer it = s.array.begin(); it != s.array.end(); ++it) {
+				for (std::array<PieceType, 9>::const_iterator it = s.array.begin(); it != s.array.end(); ++it) {
 					if (!good){
 					if (s.array[*it] == SIMPLE) {
 						if (s.array[1] == SIMPLE) { A = N; good = true; break;}
