@@ -57,12 +57,7 @@ namespace Gaming {
         virtual Piece &interact(Agent *) = 0;
         virtual Piece &interact(Resource *) = 0;
 
-        friend std::ostream &operator<<(std::ostream &os, const Piece &piece) {//TODO
-
-            piece.print(os);
-
-            return os;
-        };
+        friend std::ostream &operator<<(std::ostream &os, const Piece &piece);
     };
 }
 

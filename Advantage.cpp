@@ -29,8 +29,8 @@ namespace Gaming {
     // Parameter: std::ostream & os
     //************************************
     void Advantage::print(std::ostream &os) const { //TODO
-		
-		os << ADVANTAGE_ID << __id;
+
+        os << ADVANTAGE_ID;
 
     }
 

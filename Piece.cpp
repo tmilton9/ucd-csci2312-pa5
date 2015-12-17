@@ -16,9 +16,19 @@ namespace Gaming {
         __finished = false;
         positioned = false;
 
+
     }
 
     Gaming::Piece::~Piece() {
         __idGen--;
     }
+
+    std::ostream &operator<<(std::ostream &os, const Piece &piece) {//TODO
+
+        piece.print(os);
+
+        os << piece.__id;
+
+        return os;
+    };
 }

@@ -18,7 +18,7 @@ namespace Gaming {
 
     void Food::print(std::ostream &os) const { //TODO
 
-		os << FOOD_ID << __id;
+        os << FOOD_ID;
 
     }
 }

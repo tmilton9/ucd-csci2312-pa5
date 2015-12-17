@@ -44,7 +44,6 @@ namespace Gaming {
             for (std::array<PieceType,9>::const_iterator it = s.array.begin(); it != s.array.end(); ++it) {
                 if (!good) {
                     if (s.array[*it] == FOOD) {
-
                         if (s.array[1] == FOOD) {
                             A = N;
                             good = true;
@@ -85,15 +84,61 @@ namespace Gaming {
                             good = true;
                             break;
                         }
-
+                        }
+                    }
+            }
+            }
+        if (!good) {
+            for (std::array<PieceType, 9>::const_iterator it = s.array.begin(); it != s.array.end(); ++it) {
+                if (!good) {
+                    if (s.array[*it] == EMPTY) {
+                        if (s.array[1] == EMPTY) {
+                            A = N;
+                            good = true;
+                            break;
+                        }
+                        if (s.array[2] == EMPTY) {
+                            A = NE;
+                            good = true;
+                            break;
+                        }
+                        if (s.array[0] == EMPTY) {
+                            A = NW;
+                            good = true;
+                            break;
+                        }
+                        if (s.array[5] == EMPTY) {
+                            A = E;
+                            good = true;
+                            break;
+                        }
+                        if (s.array[3] == EMPTY) {
+                            A = W;
+                            good = true;
+                            break;
+                        }
+                        if (s.array[8] == EMPTY) {
+                            A = SE;
+                            good = true;
+                            break;
+                        }
+                        if (s.array[6] == EMPTY) {
+                            A = SW;
+                            good = true;
+                            break;
+                        }
+                        if (s.array[7] == EMPTY) {
+                            A = S;
+                            good = true;
+                            break;
+                        }
                     }
                 }
             }
         }
         if(!good){
 				for (std::array<PieceType, 9>::const_iterator it = s.array.begin(); it != s.array.end(); ++it) {
-					if (!good)
-					{
+                    if (!good) {
 						if (s.array[*it] == SIMPLE) {
 							if (s.array[1] == SIMPLE) { A = N; good = true; break;}
 							if (s.array[2] == SIMPLE) { A = NE; good = true; break;}
