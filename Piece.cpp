@@ -14,7 +14,7 @@ namespace Gaming {
         __id = __idGen++;
         __turned = false;
         __finished = false;
-        //this[p.x  * g.getWidth() + p.y].setPosition(p);
+        positioned = false;
 
     }
 

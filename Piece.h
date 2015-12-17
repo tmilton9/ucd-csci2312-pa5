@@ -38,6 +38,7 @@ namespace Gaming {
     public:
         Piece(const Game &g, const Position &p, const Game &__game);
 
+        bool positioned;
         virtual ~Piece();
 
         Position getPosition() const { return __position; }

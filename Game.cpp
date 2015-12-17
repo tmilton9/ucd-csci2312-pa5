@@ -202,10 +202,19 @@ namespace Gaming {
 		Surroundings Su;
 		int num = 0, num1 = 0, w = 0;
 		w = __width;
-		Piece *P = *this->__grid.data();
+        int e = 0;
+        for (int i = 0; i < __grid.size(); ++i) {
+            if (__grid[i] != nullptr) if (!__grid[i]->positioned) {
+                if (__grid[i]->getType() == SIMPLE || __grid[i]->getType() == STRATEGIC) {
+                    e = i;
+                    break;
+                }
+            }
+        }
+        Piece *P = this->__grid[e];
 		Position center;
 		center = P->getPosition();
-		num = (center.x * __width + center.y) - 4;
+        num = (center.x * 3 + center.y) - 4;
 		/*
 		for (int i = 0; i< __width; ++i) {
 			for (int j = 0; j < __height; ++j) {
@@ -252,9 +261,12 @@ namespace Gaming {
 				}
 			}
 			*/
+        int x, y, xc, yc;
+        xc = center.x;
+        yc = center.y;
 		for (int i = 0; i < __width; ++i) {
 			for (int k = 0; k < __height; ++k) {
-				int x, y;
+                if (Su.array[8])
 				num1 = (num + (i * w + k));
 				if (num1 < 0) {
 					Su.array[(i * w + k)] = INACCESSIBLE;
@@ -264,26 +276,58 @@ namespace Gaming {
 						if (num1 >= 0) {
 							x = __grid[num1]->getPosition().x;
 							y = __grid[num1]->getPosition().y;
-							if (center.x < x - 1 || center.x > x + 1) {
+                            if (__grid[num1]->isViable()) {
+                                Su.array[(i * w + k)] = __grid[num1]->getType();
+                            }
+                            if (xc <= x - 2 || xc >= x + 2) {
 								Su.array[(i * w + k)] = INACCESSIBLE;
 							}
-							if (center.y < y - 1 || center.y > y + 1) {
+                            if (yc <= y - 2 || yc >= y + 2) {
 								Su.array[(i * w + k)] = INACCESSIBLE;
 							}
-							else if (__grid[num1]->isViable()) {
-								Su.array[(i * w + k)] = __grid[num1]->getType();
-
-							}
-							else Su.array[(i * w + k)] = EMPTY;
-						}
-						if (__grid[num1] == nullptr) {
+                            else {
+                                if (__grid[num1]->isViable()) {
+                                    Su.array[(i * w + k)] = __grid[num1]->getType();
+                                }
+                            }
+                        }
+                    }
+                    else {
+                        if (__grid[num1] == nullptr) {
 							Su.array[(i * w + k)] = EMPTY;
-						}
-					}
+                        }
+
+
 				}
+                }
 		}
-		}
+        }
+        if (xc == 0 && yc == 0) {
+            Su.array[0] = INACCESSIBLE;
+            Su.array[3] = INACCESSIBLE;
+            Su.array[6] = INACCESSIBLE;
+            Su.array[1] = INACCESSIBLE;
+            Su.array[2] = INACCESSIBLE;
+        }
+        if (xc == 1 && yc == 0) {
+            Su.array[0] = INACCESSIBLE;
+            Su.array[3] = INACCESSIBLE;
+            Su.array[6] = INACCESSIBLE;
+        }
+        if (xc == 0 && yc == 1) {
+            Su.array[0] = INACCESSIBLE;
+            Su.array[1] = INACCESSIBLE;
+            Su.array[2] = INACCESSIBLE;
+        }
+        if (xc == 2 && yc == 0) {
+            Su.array[0] = INACCESSIBLE;
+            Su.array[1] = INACCESSIBLE;
+            Su.array[2] = INACCESSIBLE;
+            //Su.array[5] = INACCESSIBLE;
+            //Su.array[8] = INACCESSIBLE;
+        }
 		Su.array[4] = SELF;
+        __grid[e]->positioned = true;
 		return Su;
 	}
 
