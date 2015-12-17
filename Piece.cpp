@@ -7,13 +7,14 @@ namespace Gaming {
     std::vector<Piece *> __grid;
     unsigned int Piece::__idGen = 0;
 
-    Piece::Piece(const Game &g, const Position &p, const Game &__game) : __game(g) {
+    Piece::Piece(const Game &g, const Position &p, const Game &__game) : __game(__game) {
 
         __position = p;
         __id = 0;
         __id = __idGen++;
         __turned = false;
         __finished = false;
+        //this[p.x  * g.getWidth() + p.y].setPosition(p);
 
     }
 
@@ -21,4 +22,3 @@ namespace Gaming {
         __idGen--;
     }
 }
-    //std::ostream &operator<<(std::ostream &os, const Piece &piece)

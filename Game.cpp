@@ -29,12 +29,7 @@ namespace Gaming {
 		__numInitResources = (__width * __height) / NUM_INIT_RESOURCE_FACTOR;
 		manual = true;
 		__verbose = false;
-		__grid;
-
-
-
-
-
+		__grid.resize(__width * __height);
 
 
 	}
@@ -47,18 +42,15 @@ namespace Gaming {
 		__numInitAgents = (__width * __height) / NUM_INIT_AGENT_FACTOR;
 		__numInitResources = (__width * __height) / NUM_INIT_RESOURCE_FACTOR;
 		manual = manual1;
+		__grid.resize(__width * __height);
+
 
 	}
 
 	Game::Game(const Game &another) {
-		__width = another.__width;
-		__height = another.__height;
-		__round = another.__round;
-		__numInitAgents = another.__numInitAgents;
-		__numInitResources = another.__numInitResources;
 		__grid = another.__grid;
-		manual = true;
-		__verbose = another.__verbose;
+		__round = another.__round;
+		manual = another.manual;
 	}
 
 	Game::~Game() {
@@ -67,110 +59,231 @@ namespace Gaming {
 
 	unsigned int Game::getNumPieces() const {
 		unsigned int numPieces = 0;
-		numPieces += numAdvantages;
-		numPieces += numFoods;
-		numPieces += numSimple;
-		numPieces += numStrategic;
+		for (int i = 0; i < sizeof(__grid); ++i) {
+			if (__grid[i]->getType() == STRATEGIC)
+				numPieces++;
+			if (__grid[i]->getType() == SIMPLE)
+				numPieces++;
+			if (__grid[i]->getType() == FOOD)
+				numPieces++;
+			if (__grid[i]->getType() == ADVANTAGE)
+				numPieces++;
+		}
 		return numPieces;
 	}
 
 	unsigned int Game::getNumAgents() const {
 		unsigned int numAgents = 0;
-		numAgents += numStrategic;
-		numAgents += numSimple;
+		for (int i = 0; i < sizeof(__grid); ++i) {
+			if (__grid[i]->getType() == STRATEGIC)
+				numAgents++;
+			if (__grid[i]->getType() == SIMPLE)
+				numAgents++;
+		}
 		return numAgents;
 	}
 
 	unsigned int Game::getNumSimple() const {
+		unsigned int numSimple = 0;
+		for (int i = 0; i < sizeof(__grid); ++i) {
+			if (__grid[i]->getType() == SIMPLE)
+				numSimple++;
+		}
 		return numSimple;
 	}
 
 	unsigned int Game::getNumStrategic() const {
+		unsigned int numStrategic = 0;
+		for (int i = 0; i < sizeof(__grid); ++i) {
+			if (__grid[i]->getType() == SIMPLE)
+				numStrategic++;
+		}
 		return numStrategic;
 	}
 
 	unsigned int Game::getNumResources() {
 		unsigned int numResources = 0;
-		numResources += numFoods;
-		numResources += numAdvantages;
+		for (int i = 0; i < sizeof(__grid); ++i) {
+			if (__grid[i]->getType() == FOOD)
+				numResources++;
+		}
+		for (int i = 0; i < sizeof(__grid); ++i) {
+			if (__grid[i]->getType() == ADVANTAGE)
+				numResources++;
+		}
 		return numResources;
 	}
 
 	bool Game::addSimple(const Position &position) {
 		Piece *P = new Simple(*this, position, STARTING_AGENT_ENERGY);
-		__grid.assign(position.x * __width + position.y, P);
-		numStrategic++;
+		//__grid.push_back(P);
+		//__grid.assign(position.x * __width + position.y, P);
+		int loc;
+		loc = (position.x * __width + position.y);
+		__grid[loc] = P;
 		return true;
 	}
 
 	bool Game::addSimple(unsigned x, unsigned y) {
 		Position position(x, y);
 		Simple *P = new Simple(*this, position, STARTING_AGENT_ENERGY) ;
-		__grid.assign(position.x * __width + position.y, P);
-		numStrategic++;
+		//__grid.push_back(P);
+		//__grid.assign(position.x * __width + position.y, P);
+		int loc;
+		loc = (position.x * __width + position.y);
+		__grid[loc] = P;
 		return true;
 	}
 
 	bool Game::addStrategic(const Position &position, Strategy *s) {
 		Strategic * P = new Strategic(*this, position, STARTING_AGENT_ENERGY, s);
-		__grid.assign(position.x * __width + position.y, P);
-		numStrategic++;
+		//__grid.push_back(P);
+		//__grid.assign(position.x * __width + position.y, P);
+		int loc;
+		loc = (position.x * __width + position.y);
+		__grid[loc] = P;
 		return true;
 	}
 
 	bool Game::addStrategic(unsigned x, unsigned y, Strategy *s) {
 		Position position(x, y);
 		Strategic * P = new Strategic(*this, position, STARTING_AGENT_ENERGY, s);
-		__grid.assign(position.x * __width + position.y, P);
-		numStrategic++;
+		//__grid.push_back(P);
+		//__grid.assign(position.x * __width + position.y, P);
+		int loc;
+		loc = (position.x * __width + position.y);
+		__grid[loc] = P;
 		return true;
 	}
 
 	bool Game::addFood(const Position &position) {
 		Food * P = new Food(*this, position, STARTING_RESOURCE_CAPACITY);
-		__grid.assign(position.x * __width + position.y, P);
-		numFoods++;
+		//__grid.push_back(P);
+		//__grid.assign(position.x * __width + position.y, P);
+		int loc;
+		loc = (position.x * __width + position.y);
+		__grid[loc] = P;
 		return true;
 	}
 
 	bool Game::addFood(unsigned x, unsigned y) {
 		Position position(x, y);
 		Food * P = new Food(*this, position, STARTING_RESOURCE_CAPACITY);
-		__grid.assign(position.x * __width + position.y, P);
-		numFoods++;
+		///__grid.push_back(P);
+		//__grid.assign(position.x * __width + position.y, P);
+		int loc;
+		loc = (position.x * __width + position.y);
+		__grid[loc] = P;
 		return true;
 	}
 
 	bool Game::addAdvantage(const Position &position) {
 		Advantage * P = new Advantage(*this, position, STARTING_RESOURCE_CAPACITY);
-		__grid.assign(position.x * __width + position.y, P);
-		numAdvantages++;
+		//__grid.push_back(P);
+		//__grid.assign(position.x * __width + position.y, P);
+		int loc;
+		loc = (position.x * __width + position.y);
+		__grid[loc] = P;
 		return true;
 	}
 
 	bool Game::addAdvantage(unsigned x, unsigned y) {
 		Position position(x, y);
 		Advantage * P = new Advantage(*this, position, STARTING_RESOURCE_CAPACITY);
-		__grid.assign(position.x * __width + position.y, P);
-		numAdvantages++;
+		//__grid.push_back(P);
+		//__grid.assign(position.x * __width + position.y, P);
+		int loc;
+		loc = (position.x * __width + position.y);
+		__grid[loc] = P;
 		return true;
 	}
 
 	const Surroundings Gaming::Game::getSurroundings() const {
 		Surroundings Su;
-		int num , num1 = 0;
-		Su.array[4] = __grid[0]->getType();
-		Position Mid = __grid[0]->getPosition();
-		num1 = Mid.x  * __width + Mid.y;
-		for (int i = 0; i< 9; ++i){
-			num = i - num1;
-			if( num < 0 || num > 8){
-				Su.array[i] = INACCESSIBLE;
+		int num = 0, num1 = 0, w = 0;
+		w = __width;
+		Piece *P = *this->__grid.data();
+		Position center;
+		center = P->getPosition();
+		num = (center.x * __width + center.y) - 4;
+		/*
+		for (int i = 0; i< __width; ++i) {
+			for (int j = 0; j < __height; ++j) {
+			int x, y;
+				num1  = (num + (i  * w + j));
+			if (num1 < 0) { }
+			else {
+				x = __grid[num1]->getPosition().x;
+				y = __grid[num1]->getPosition().y;
+				if (x > __width * __height || y > __width * __height) { }
+				else {
+					if (x == center.x - 1 && y == center.y - 1) {//0 (-1,-1)
+
+						Su.array[i] = __grid[num1]->getType();
+					}
+					if (x == center.x && y == center.y - 1) {//3 (0,-1)
+
+						Su.array[i] = __grid[num1]->getType();
+					}
+					if (x == center.x + 1 && y == center.y - 1) {//6 (1,-1)
+
+						Su.array[i] = __grid[num1]->getType();
+					}
+					if (x == center.x - 1 && y == center.y) {//1 (-1,0)
+
+						Su.array[i] = __grid[num1]->getType();
+					}
+					if (x == center.x && y == center.y) {//4 (0,-0)
+
+						Su.array[i] = SELF;
+					}
+					if (x == center.x + 1 && y == center.y) {//7 (1,0)
+						Su.array[i] = __grid[num1]->getType();
+					}
+					if (x == center.x - 1 && y == center.y + 1) {//2 (-1,1)
+						Su.array[i] = __grid[num1]->getType();
+					}
+					if (x == center.x && y == center.y + 1) {//5 (0,1)
+						Su.array[i] = __grid[num1]->getType();
+					}
+					if (x == center.x + 1 && y == center.y + 1) {//8 (1,1)
+						Su.array[i] = __grid[num1]->getType();
+					}
+				}
 			}
-			else if (__grid[num]->isViable())
-				Su.array[i] = __grid[num]->getType();
-			else Su.array[i] = EMPTY;
+			*/
+		for (int i = 0; i < __width; ++i) {
+			for (int k = 0; k < __height; ++k) {
+				int x, y;
+				num1 = (num + (i * w + k));
+				if (num1 < 0) {
+					Su.array[(i * w + k)] = INACCESSIBLE;
+				}
+				else {
+					if (__grid[num1] != nullptr) {
+						if (num1 >= 0) {
+							x = __grid[num1]->getPosition().x;
+							y = __grid[num1]->getPosition().y;
+							if (center.x < x - 1 || center.x > x + 1) {
+								Su.array[(i * w + k)] = INACCESSIBLE;
+							}
+							if (center.y < y - 1 || center.y > y + 1) {
+								Su.array[(i * w + k)] = INACCESSIBLE;
+							}
+							else if (__grid[num1]->isViable()) {
+								Su.array[(i * w + k)] = __grid[num1]->getType();
+
+							}
+							else Su.array[(i * w + k)] = EMPTY;
+						}
+						if (__grid[num1] == nullptr) {
+							Su.array[(i * w + k)] = EMPTY;
+						}
+					}
+				}
 		}
+		}
+		Su.array[4] = SELF;
 		return Su;
 	}
 
@@ -287,11 +400,10 @@ namespace Gaming {
 	}
 
 	void Game::round() {
-		for (auto j = 0; j < numPositions; ++j) {
+		for (auto j = 0; j < __grid.size(); ++j) {
 			if (__grid[j] != 0) {
 				if (__grid[j]->isViable()) {
 					__grid[j]->~Piece();
-					numPositions--;
 				}
 				if (!__grid[j]->getTurned()) {
 					if (__grid[j]->getType() == STRATEGIC) {
@@ -302,21 +414,19 @@ namespace Gaming {
 				}
 			}
 		}
-		for (auto j = 0; j < numPositions; ++j) {
+		for (auto j = 0; j < __grid.size(); ++j) {
 			__grid[j]->age();
 			__grid[j]->setTurned(false);
 			if (__grid[j]->isViable()) {
 				__grid[j]->~Piece();
 				__grid[j] = 0;
-				numPositions--;
 			}
 		}
 	}
 
 	void Game::populate() {
 		if (!manual) {
-			numPositions = __height * __width;
-			for (unsigned int j = 0; j < numPositions; ++j) {
+			for (unsigned int j = 0; j < __height * __width; ++j) {
 				__grid.push_back(nullptr);
 			}
 			unsigned int numStrategicP = __numInitAgents / 2;
@@ -333,7 +443,6 @@ namespace Gaming {
 					Position pos(i / __width, i % __width);
 					__grid[i] = new Strategic(*this, pos, Game::STARTING_AGENT_ENERGY);
 					numStrategicP--;
-					numStrategic++;
 				}
 			}
 
@@ -344,7 +453,6 @@ namespace Gaming {
 					Position pos(i / __width, i % __width);
 					__grid[i] = new Simple(*this, pos, Game::STARTING_AGENT_ENERGY);
 					numSimpleP--;
-					numSimple++;
 				}
 			}
 
@@ -355,7 +463,6 @@ namespace Gaming {
 					Position pos(i / __width, i % __width);
 					__grid[i] = new Food(*this, pos, Game::STARTING_RESOURCE_CAPACITY);
 					numFoodsP--;
-					numFoods++;
 				}
 			}
 			// populate Advantage Reasorces
@@ -365,7 +472,6 @@ namespace Gaming {
 					Position pos(i / __width, i % __width);
 					__grid[i] = new Advantage(*this, pos, Game::STARTING_RESOURCE_CAPACITY);
 					numAdvantagesP--;
-					numAdvantages++;
 				}
 			}
 		}

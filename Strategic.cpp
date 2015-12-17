@@ -53,8 +53,9 @@ namespace Gaming {
 		O = this->getPosition();
 		ActionType A;
 		ActionType AT;
+        std::vector<int> index{0, 1, 2, 3, 4, 5, 6, 7, 8};
 		while (!good) {
-			P = __game.randomPosition((const std::vector<int> &) s.array);
+            P = __game.randomPosition(index);
 			AT = __strategy->operator()(s);
 			if (AT !=STAY) { return AT; }
 			A = __game.reachSurroundings(O, P);

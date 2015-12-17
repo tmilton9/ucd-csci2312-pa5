@@ -14,6 +14,7 @@ namespace Gaming {
 
     Agent::Agent(const Game &g, const Position &p, double energy) : Piece(g, p, Game(g)) {
         __energy = energy;
+
     }
 
     Agent::~Agent() {

@@ -35,11 +35,7 @@ namespace Gaming {
         void populate(); // populate the grid (used in automatic random initialization of a Game)
 
         unsigned __numInitAgents, __numInitResources;
-        unsigned int numPositions = 0;
-        unsigned int numStrategic = 0;
-        unsigned int numSimple = 0;
-        unsigned int numAdvantages = 0;
-        unsigned int numFoods = 0;
+
         unsigned __width, __height;
         std::vector<Piece *> __grid; // if a position is empty, nullptr
 
@@ -135,6 +131,7 @@ namespace Gaming {
 
             return os;
         };
+
     };
 
 }
