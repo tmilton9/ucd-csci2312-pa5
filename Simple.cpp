@@ -59,22 +59,25 @@ namespace Gaming {
 	ActionType Simple::takeTurn(const Surroundings &s) const {
 
 		int              desiredPosition = -1;                  // return value
-		std::vector<int> ResourceList;                          // vector of where the resources are
+		std::vector<int> AdvantageList;                         // vector of where Advantages are
+		std::vector<int> FoodList;                              // vector of where Food is
 		std::vector<int> EmptyList;                             // vector of empty positions.
 
 		for (int n = 0; n < s.array.size(); n++) {              // loop for the surroundings array
 			int temp = n;
-			if (s.array[n] == FOOD || s.array[n] == ADVANTAGE) {  // if resource
-				ResourceList.push_back(temp);
-			}                   // add to Resource pos array
-			if (s.array[n] == EMPTY) {                            // if empty
-				EmptyList.push_back(temp);
-			}                      // add to Empty pos array
+			if (s.array[n] == ADVANTAGE) {                      // if Advantage
+				AdvantageList.push_back(temp); }                // add to Resource pos array
+			if (s.array[n] == FOOD){                            // if Food
+				FoodList.push_back(temp); }                     // add to Food pos array
+			if (s.array[n] == EMPTY) {                          // if empty
+				EmptyList.push_back(temp); }                    // add to Empty pos array
 		}
-		if (ResourceList.empty() && EmptyList.empty())          // if both arrays stay empty then dont move
-		{ return STAY; }
-		if (!ResourceList.empty())                              // if there are resources pick one
-		{ desiredPosition = ResourceList[rand() % ResourceList.size()]; }
+		if (AdvantageList.empty() && EmptyList.empty() && FoodList.empty()){        // if both arrays stay empty then dont mov
+			return STAY; }
+		else if (!AdvantageList.empty()) {                           // if there are Advantages pick one
+			desiredPosition = AdvantageList[rand() % AdvantageList.size()]; }
+		else if (!FoodList.empty()){                                 // if food pick one
+			desiredPosition = FoodList[rand() % FoodList.size()]; }
 		else {                                                  // if not then pick an empty location
 			if (!EmptyList.empty())                             // if there are empty positions available pick one
 			{ desiredPosition = EmptyList[rand() % EmptyList.size()]; }
@@ -82,7 +85,7 @@ namespace Gaming {
 		if (desiredPosition == 4) {                             // if it picks 4 (where it already is) then
 			if (EmptyList.size() < 1) {                         // check for other positions
 				desiredPosition = EmptyList[1];
-			}                // if there are then pick the next one
+			}                                                   // if there are then pick the next one
 		}                                                       // if statements to convert number to ActionType
 		if (desiredPosition == 0) return NW;
 		if (desiredPosition == 1) return N;

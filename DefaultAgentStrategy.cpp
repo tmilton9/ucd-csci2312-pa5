@@ -41,33 +41,33 @@ namespace Gaming {
 	//            if none of those are aavailable then it will move to an empty space or stay
 	//****************************************************************************************
 	ActionType Gaming::DefaultAgentStrategy::operator()(const Surroundings &s) const {
-		int              desiredPosition = -1;                            // return value
-		std::vector<int> AdvantageList;                                   // vector of Advantages
-		std::vector<int> FoodList;                                        // vector of Food
-		std::vector<int> SimpleList;                                      // vector of Simples
-		std::vector<int> EmptyList;                                       // Vector of Empty
+		int              desiredPosition = -1;                             // return value
+		std::vector<int> AdvantageList;                                    // vector of Advantages
+		std::vector<int> FoodList;                                         // vector of Food
+		std::vector<int> SimpleList;                                       // vector of Simples
+		std::vector<int> EmptyList;                                        // Vector of Empty
 
-		for (int n = 0; n < s.array.size(); n++)                          // loop through positions
+		for (int n = 0; n < s.array.size(); n++)                           // loop through positions
 		{
-			int temp = n;                                                 // set to proper list
+			int temp = n;                                                  // set to proper list
 			if (s.array[n] == ADVANTAGE) { AdvantageList.push_back(temp); }
 			if (s.array[n] == FOOD) { FoodList.push_back(temp); }
 			if (s.array[n] == SIMPLE) { SimpleList.push_back(temp); }
 			if (s.array[n] == EMPTY) { EmptyList.push_back(temp); }
 		}
-		if (!EmptyList.empty())                                           // if there are empty spaces
+		if (!EmptyList.empty())                                            // if there are empty spaces
 		{ desiredPosition = EmptyList[rand() % EmptyList.size()]; }        // pick an empty pos
-		if (!SimpleList.empty())                                          // if there are Simples
+		if (!SimpleList.empty())                                           // if there are Simples
 		{ desiredPosition = SimpleList[rand() % SimpleList.size()]; }      // pick a Simple to Attack
-		if (!FoodList.empty())                                            // if there is food
+		if (!FoodList.empty())                                             // if there is food
 		{ desiredPosition = FoodList[rand() % FoodList.size()]; }          // pick a food instead
-		if (!AdvantageList.empty())                                       // if there is an advantage
+		if (!AdvantageList.empty())                                        // if there is an advantage
 		{ desiredPosition = AdvantageList[rand() % AdvantageList.size()]; }// pick one instead
-		if (desiredPosition == 4) {                                       // if desired location is where we are
-			if (EmptyList.size() > 1) {                                   // make sure that it is the only possibility
+		if (desiredPosition == 4) {                                        // if desired location is where we are
+			if (EmptyList.size() > 1) {                                    // make sure that it is the only possibility
 				desiredPosition = EmptyList[1];
-			}                          // otherwise pick the next one
-		}                                                                 // convert number to ActionType
+			}                                                              // otherwise pick the next one
+		}                                                                  // convert number to ActionType
 		if (desiredPosition == 0) return NW;
 		if (desiredPosition == 1) return N;
 		if (desiredPosition == 2) return NE;

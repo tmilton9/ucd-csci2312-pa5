@@ -12,15 +12,15 @@
 #include <set>
 
 namespace Gaming {
-	const unsigned int Game::NUM_INIT_AGENT_FACTOR    = 4;         // factor for auto pop of agents
-	const unsigned int Game::NUM_INIT_RESOURCE_FACTOR = 2;      // factor for auto pop or resources
+	const unsigned int Game::NUM_INIT_AGENT_FACTOR    = 4;  // factor for auto pop of agents
+	const unsigned int Game::NUM_INIT_RESOURCE_FACTOR = 2;  // factor for auto pop or resources
 
-	Gaming::PositionRandomizer Game::__posRandomizer;           // used to provide a random position during turns
+	Gaming::PositionRandomizer Game::__posRandomizer;       // used to provide a random position during turns
 
-	const unsigned Game::MIN_WIDTH                  = 3;                         // min game board height
-	const unsigned Game::MIN_HEIGHT                 = 3;                        // min game board width
-	const double   Game::STARTING_AGENT_ENERGY      = 20;              // default starting agent energy
-	const double   Game::STARTING_RESOURCE_CAPACITY = 10;         // default starting resource cap
+	const unsigned Game::MIN_WIDTH                  = 3;    // min game board height
+	const unsigned Game::MIN_HEIGHT                 = 3;    // min game board width
+	const double   Game::STARTING_AGENT_ENERGY      = 20;   // default starting agent energy
+	const double   Game::STARTING_RESOURCE_CAPACITY = 10;   // default starting resource cap
 
 	//**********************************************************************
 	// Method:    Game
@@ -129,7 +129,7 @@ namespace Gaming {
 			}
 			os << std::endl;                                  // end the line after both loops
 		}
-		if (game.getStatus() == 0) {                            // output statements for status
+		if (game.getStatus() == 0) {                          // output statements for status
 			os << "Status: Not Started" << std::endl;
 		} else if (game.getStatus() == 1) {
 			os << "Status: Playing..." << std::endl;
@@ -148,7 +148,7 @@ namespace Gaming {
 	// Info:      function to determine number of remaining Pieces on board
 	//**********************************************************************
 	unsigned int Game::getNumPieces() const {
-		auto         it    = __grid.begin();                              // iterator
+		auto         it    = __grid.begin();                   // iterator
 		unsigned int count = 0;                                // return value
 		for (; it != __grid.end(); ++it) {                     // loop grid
 			if (*it != nullptr) {                              // if not 0
@@ -170,7 +170,7 @@ namespace Gaming {
 	// Info:      function to determine number of agents on board
 	//            calls getNumSimple and getNumStrategic
 	//*********************************************************************
-	unsigned int Game::getNumAgents() const {// calls functions to count Simple and Strategic
+	unsigned int Game::getNumAgents() const {               // calls functions to count Simple and Strategic
 		return getNumSimple() + getNumStrategic();
 	}
 
@@ -183,7 +183,7 @@ namespace Gaming {
 	// Info:      function to determine number of Simple Agents on board
 	//*********************************************************************
 	unsigned int Game::getNumSimple() const {
-		auto         it    = __grid.begin();                           // iterator
+		auto         it    = __grid.begin();                // iterator
 		unsigned int count = 0;                             // iterator
 		for (; it != __grid.end(); ++it) {                  // loop grid
 			if (*it != nullptr) {                           // if not 0
@@ -202,11 +202,11 @@ namespace Gaming {
 	// Info:      function to determine number of Strategic Agents on board
 	//*********************************************************************
 	unsigned int Game::getNumStrategic() const {
-		auto         it    = __grid.begin();                           // iterator
-		unsigned int count = 0;                             // iterator
-		for (; it != __grid.end(); ++it) {                  // loop grid
-			if (*it != nullptr) {                           // if not 0
-				if ((*it)->getType() == STRATEGIC) { count++; }// if Strategic increment count
+		auto         it    = __grid.begin();                    // iterator
+		unsigned int count = 0;                                 // iterator
+		for (; it != __grid.end(); ++it) {                      // loop grid
+			if (*it != nullptr) {                               // if not 0
+				if ((*it)->getType() == STRATEGIC) { count++; } // if Strategic increment count
 			}
 		}
 		return count;
@@ -222,12 +222,12 @@ namespace Gaming {
 	//            Resources on board
 	//*********************************************************************
 	unsigned int Game::getNumResources() {
-		auto         it    = __grid.begin();                           // iterator
-		unsigned int count = 0;                             // iterator
-		for (; it != __grid.end(); ++it) {                  // loop grid
-			if (*it != nullptr) {                           // if not 0
-				if ((*it)->getType() == ADVANTAGE) { count++; }// if Advantage increment count
-				if ((*it)->getType() == FOOD) { count++; }  // if Food increment count
+		auto         it    = __grid.begin();                    // iterator
+		unsigned int count = 0;                                 // iterator
+		for (; it != __grid.end(); ++it) {                      // loop grid
+			if (*it != nullptr) {                               // if not 0
+				if ((*it)->getType() == ADVANTAGE) { count++; } // if Advantage increment count
+				if ((*it)->getType() == FOOD) { count++; }      // if Food increment count
 			}
 		}
 		return count;
@@ -246,10 +246,9 @@ namespace Gaming {
 		unsigned int x = position.x;                             // sets x from pos info
 		unsigned int y = position.y;                             // sets y from pos info
 		if (x >= __height || y >= __width) {                     // check for out of bounds
-			throw OutOfBoundsEx(__width, __height, x, y);
-		}      // throw exeption if out of bounds
+			throw OutOfBoundsEx(__width, __height, x, y); }      // throw exception if out of bounds
 		if (__grid[x * __width + y] != nullptr) { return false; }// if position is taken return false
-		// create new Peice for position
+																 // create new Piece for position
 		__grid[x * __width + y] = new Simple(*this, position, STARTING_AGENT_ENERGY);
 		return true;
 	}
@@ -267,10 +266,9 @@ namespace Gaming {
 	bool Game::addSimple(unsigned x, unsigned y) {
 		Position position(x, y);
 		if (x >= __height || y >= __width) {                     // check for out of bounds
-			throw OutOfBoundsEx(__width, __height, x, y);
-		}      // throw exeption if out of bounds
+			throw OutOfBoundsEx(__width, __height, x, y); }      // throw exception if out of bounds
 		if (__grid[x * __width + y] != nullptr) { return false; }// if position is taken return false
-		// create new Peice for position
+															     // create new Piece for position
 		__grid[x * __width + y] = new Simple(*this, position, STARTING_AGENT_ENERGY);
 		return true;
 	}
@@ -289,10 +287,9 @@ namespace Gaming {
 		unsigned int x = position.x;                             // sets x from pos info
 		unsigned int y = position.y;                             // sets y from pos info
 		if (x >= __height || y >= __width) {                     // check for out of bounds
-			throw OutOfBoundsEx(__width, __height, x, y);
-		}      // throw exeption if out of bounds
+			throw OutOfBoundsEx(__width, __height, x, y); }      // throw exception if out of bounds
 		if (__grid[x * __width + y] != nullptr) { return false; }// if position is taken return false
-		// create new Peice for position
+																 // create new Piece for position
 		__grid[x * __width + y] = new Strategic(*this, position, STARTING_AGENT_ENERGY, s);
 		return true;
 	}
@@ -311,10 +308,9 @@ namespace Gaming {
 	bool Game::addStrategic(unsigned x, unsigned y, Strategy *s) {
 		Position position(x, y);
 		if (x >= __height || y >= __width) {                     // check for out of bounds
-			throw OutOfBoundsEx(__width, __height, x, y);
-		}      // throw exeption if out of bounds
+			throw OutOfBoundsEx(__width, __height, x, y); }      // throw exception if out of bounds
 		if (__grid[x * __width + y] != nullptr) { return false; }// if position is taken return false
-		// create new Peice for position
+																 // create new Piece for position
 		__grid[x * __width + y] = new Strategic(*this, position, STARTING_AGENT_ENERGY, s);
 		return true;
 	}
@@ -332,10 +328,9 @@ namespace Gaming {
 		unsigned int x = position.x;                             // sets x from pos info
 		unsigned int y = position.y;                             // sets y from pos info
 		if (x >= __height || y >= __width) {                     // check for out of bounds
-			throw OutOfBoundsEx(__width, __height, x, y);
-		}      // throw exeption if out of bounds
+			throw OutOfBoundsEx(__width, __height, x, y); }      // throw exception if out of bounds
 		if (__grid[x * __width + y] != nullptr) { return false; }// if position is taken return false
-		// create new Peice for position
+																 // create new Piece for position
 		__grid[x * __width + y] = new Food(*this, position, STARTING_RESOURCE_CAPACITY);
 		return true;
 	}
@@ -353,10 +348,9 @@ namespace Gaming {
 	bool Game::addFood(unsigned x, unsigned y) {
 		Position position(x, y);
 		if (x >= __height || y >= __width) {                     // check for out of bounds
-			throw OutOfBoundsEx(__width, __height, x, y);
-		}      // throw exeption if out of bounds
+			throw OutOfBoundsEx(__width, __height, x, y); }      // throw exception if out of bounds
 		if (__grid[x * __width + y] != nullptr) { return false; }// if position is taken return false
-		// create new Peice for position
+																 // create new Piece for position
 		__grid[x * __width + y] = new Food(*this, position, STARTING_RESOURCE_CAPACITY);
 		return true;
 	}
@@ -374,10 +368,9 @@ namespace Gaming {
 		unsigned int x = position.x;                             // sets x from pos info
 		unsigned int y = position.y;                             // sets y from pos info
 		if (x >= __height || y >= __width) {                     // check for out of bounds
-			throw OutOfBoundsEx(__width, __height, x, y);
-		}      // throw exeption if out of bounds
+			throw OutOfBoundsEx(__width, __height, x, y); }      // throw exception if out of bounds
 		if (__grid[x * __width + y] != nullptr) { return false; }// if position is taken return false
-		// create new Peice for position
+																 // create new Piece for position
 		__grid[x * __width + y] = new Advantage(*this, position, STARTING_RESOURCE_CAPACITY);
 		return true;
 	}
@@ -395,10 +388,9 @@ namespace Gaming {
 	bool Game::addAdvantage(unsigned x, unsigned y) {
 		Position position(x, y);
 		if (x >= __height || y >= __width) {                     // check for out of bounds
-			throw OutOfBoundsEx(__width, __height, x, y);
-		}      // throw exeption if out of bounds
+			throw OutOfBoundsEx(__width, __height, x, y); }      // throw exception if out of bounds
 		if (__grid[x * __width + y] != nullptr) { return false; }// if position is taken return false
-		// create new Peice for position
+																 // create new Piece for position
 		__grid[x * __width + y] = new Advantage(*this, position, STARTING_RESOURCE_CAPACITY);
 		return true;
 	}
@@ -416,115 +408,97 @@ namespace Gaming {
 	//                        NW, N, NE, W, SELF, E, SW, S, SE
 	//*********************************************************************
 	const Surroundings Gaming::Game::getSurroundings(Position const &p) const {
-		Surroundings s; // array object to be returned
-		int          a, b,  // x, y pos 0
-		             c, d,  // x, y pos 1
-		             e, f,  // x, y pos 2
-		             g, h,  // x, y pos 3
-		             i, j,  // x, y pos 4
-		             k, l,  // x, y pos 5
-		             m, n,  // x, y pos 6
-		             o, q,  // x, y pos 7
-		             r, t;  // x, y pos 8
-		// sets for NW
+		Surroundings                s;                            // array object to be returned
+		int                         a, b,                         // x, y pos 0
+		                            c, d,                         // x, y pos 1
+		                            e, f,                         // x, y pos 2
+		                            g, h,                         // x, y pos 3
+		                            i, j,                         // x, y pos 4
+		                            k, l,                         // x, y pos 5
+		                            m, n,                         // x, y pos 6
+		                            o, q,                         // x, y pos 7
+		                            r, t;                         // x, y pos 8
+																  // sets for NW
 		a = p.x - 1;
 		b = p.y - 1;
 
 		if (a < 0 || b < 0 || a > (__height - 1) || b > (__width - 1)) {
-			s.array[0] = INACCESSIBLE;
-		} // check if Pos is on the board if !is then mark Inaccessible
+			s.array[0] = INACCESSIBLE; }                          // if not on the board if !is then mark Inaccessible
 		else if (__grid[a * __width + b] == nullptr) {
-			s.array[0] = EMPTY;
-		} // if the valid location is empty mark Empty
-		else { s.array[0] = __grid[a * __width + b]->getType(); } // set Peice type in the array
-		// sets for N
+			s.array[0] = EMPTY; }                                 // if the valid location is empty mark Empty
+		else { s.array[0] = __grid[a * __width + b]->getType(); } // set Piece type in the array
+																  // sets for N
 		c = p.x - 1;
 		d = p.y;
 
 		if (c < 0 || d < 0 || c > (__height - 1) || d > (__width - 1)) {
-			s.array[1] = INACCESSIBLE;
-		} // check if Pos is on the board if !is then mark Inaccessible
+			s.array[1] = INACCESSIBLE; }                          // if not on the board if !is then mark Inaccessible
 		else if (__grid[c * __width + d] == nullptr) {
-			s.array[1] = EMPTY;
-		} // if the valid location is empty mark Empty
-		else { s.array[1] = __grid[c * __width + d]->getType(); } // set Peice type in the array
-		// sets for NE
+			s.array[1] = EMPTY; }                                 // if the valid location is empty mark Empty
+		else { s.array[1] = __grid[c * __width + d]->getType(); } // set Piece type in the array
+																  // sets for NE
 		e = p.x - 1;
 		f = p.y + 1;
 
 		if (e < 0 || f < 0 || e > (__height - 1) || f > (__width - 1)) {
-			s.array[2] = INACCESSIBLE;
-		} // check if Pos is on the board if !is then mark Inaccessible
+			s.array[2] = INACCESSIBLE; }                          // if not on the board if !is then mark Inaccessible
 		else if (__grid[e * __width + f] == nullptr) {
-			s.array[2] = EMPTY;
-		} // if the valid location is empty mark Empty
-		else { s.array[2] = __grid[e * __width + f]->getType(); } // set Peice type in the array
-		// sets for W
+			s.array[2] = EMPTY; }                                 // if the valid location is empty mark Empty
+		else { s.array[2] = __grid[e * __width + f]->getType(); } // set Piece type in the array
+																  // sets for W
 		g = p.x;
 		h = p.y - 1;
 
 		if (g < 0 || h < 0 || g > (__height - 1) || h > (__width - 1)) {
-			s.array[3] = INACCESSIBLE;
-		} // check if Pos is on the board if !is then mark Inaccessible
+			s.array[3] = INACCESSIBLE; }                          // if not on the board if !is then mark Inaccessible
 		else if (__grid[g * __width + h] == nullptr) {
-			s.array[3] = EMPTY;
-		} // if the valid location is empty mark Empty
-		else { s.array[3] = __grid[g * __width + h]->getType(); } // set Peice type in the array
-		// sets for self
+			s.array[3] = EMPTY; }                                 // if the valid location is empty mark Empty
+		else { s.array[3] = __grid[g * __width + h]->getType(); } // set Piece type in the array
+																  // sets for self
 		i = p.x;
 		j = p.y;
 
 		if (i < 0 || j < 0 || i > (__height - 1) || j > (__width - 1)) {
-			s.array[4] = INACCESSIBLE;
-		} // check if Pos is on the board if !is then mark Inaccessible
+			s.array[4] = INACCESSIBLE; }                          // if not on the board if !is then mark Inaccessible
 		else if (__grid[i * __width + j] == nullptr) {
-			s.array[4] = EMPTY;
-		} // if the valid location is empty mark Empty
-		else { s.array[4] = SELF; } // set Peice type in the array
-		// sets for E
+			s.array[4] = EMPTY; }                                 // if the valid location is empty mark Empty
+		else { s.array[4] = SELF; }                               // set Piece type in the array
+																  // sets for E
 		k = p.x;
 		l = p.y + 1;
 
 		if (k < 0 || l < 0 || k > (__height - 1) || l > (__width - 1)) {
-			s.array[5] = INACCESSIBLE;
-		} // check if Pos is on the board if !is then mark Inaccessible
+			s.array[5] = INACCESSIBLE; }                          // if not on the board if !is then mark Inaccessible
 		else if (__grid[k * __width + l] == nullptr) {
-			s.array[5] = EMPTY;
-		} // if the valid location is empty mark Empty
-		else { s.array[5] = __grid[k * __width + l]->getType(); } // set Peice type in the array
-		// sets for SW
+			s.array[5] = EMPTY; }                                 // if the valid location is empty mark Empty
+		else { s.array[5] = __grid[k * __width + l]->getType(); } // set Piece type in the array
+																  // sets for SW
 		m = p.x + 1;
 		n = p.y - 1;
 
 		if (m < 0 || n < 0 || m > (__height - 1) || n > (__width - 1)) {
-			s.array[6] = INACCESSIBLE;
-		} // check if Pos is on the board if !is then mark Inaccessible
+			s.array[6] = INACCESSIBLE; }                          // if not on the board if !is then mark Inaccessible
 		else if (__grid[m * __width + n] == nullptr) {
-			s.array[6] = EMPTY;
-		} // if the valid location is empty mark Empty
-		else { s.array[6] = __grid[m * __width + n]->getType(); } // set Peice type in the array
-		// sets for S
+			s.array[6] = EMPTY; }                                 // if the valid location is empty mark Empty
+		else { s.array[6] = __grid[m * __width + n]->getType(); } // set Piece type in the array
+																  // sets for S
 		o = p.x + 1;
 		q = p.y;
 
 		if (o < 0 || q < 0 || o > (__height - 1) || q > (__width - 1)) {
-			s.array[7] = INACCESSIBLE;
-		} // check if Pos is on the board if !is then mark Inaccessible
+			s.array[7] = INACCESSIBLE; }                          // if not on the board if !is then mark Inaccessible
 		else if (__grid[o * __width + q] == nullptr) {
-			s.array[7] = EMPTY;
-		} // if the valid location is empty mark Empty
-		else { s.array[7] = __grid[o * __width + q]->getType(); } // set Peice type in the array
-		// sets for SE
+			s.array[7] = EMPTY; }                                 // if the valid location is empty mark Empty
+		else { s.array[7] = __grid[o * __width + q]->getType(); } // set Piece type in the array
+																  // sets for SE
 		r = p.x + 1;
 		t = p.y + 1;
 
 		if (r < 0 || t < 0 || r > (__height - 1) || t > (__width - 1)) {
-			s.array[8] = INACCESSIBLE;
-		} // check if Pos is on the board if !is then mark Inaccessible
+			s.array[8] = INACCESSIBLE; }                          // if not on the board if !is then mark Inaccessible
 		else if (__grid[r * __width + t] == nullptr) {
-			s.array[8] = EMPTY;
-		} // if the valid location is empty mark Empty
-		else { s.array[8] = __grid[r * __width + t]->getType(); } // set Peice type in the array
+			s.array[8] = EMPTY; }                                 // if the valid location is empty mark Empty
+		else { s.array[8] = __grid[r * __width + t]->getType(); } // set Piece type in the array
 
 		return s;
 	}
@@ -566,75 +540,58 @@ namespace Gaming {
 	//            is a valid move
 	//*********************************************************************
 	bool Game::isLegal(const ActionType &ac, const Position &pos) const {
-		bool legal = true;                      // return item
-		auto Su    = getSurroundings(pos);         // surroundings array
+		bool legal = true;                              // return item
+		auto Su    = getSurroundings(pos);              // surroundings array
 
-		switch (ac) {                           // Switch to check values of ac
+		switch (ac) {                                   // Switch to check values of ac
 
-			case N: {                           // checks if N is valid
+			case N: {                                   // checks if N is valid
 				if (Su.array[1] == INACCESSIBLE) {
-					legal = false;
-					break;
-				}
+					legal = false; break; }
 				else { return true; }
 			}
-			case NE: {                           // checks if NE is valid
+			case NE: {                                  // checks if NE is valid
 				if (Su.array[2] == INACCESSIBLE) {
-					legal = false;
-					break;
-				}
+					legal = false; break; }
 				else { return true; }
 			}
-			case NW: {                           // checks if NW is valid
+			case NW: {                                  // checks if NW is valid
 				if (Su.array[0] == INACCESSIBLE) {
-					legal = false;
-					break;
-				}
+					legal = false; break; }
 				else { return true; }
 			}
-			case E: {                           // checks if E is valid
+			case E: {                                   // checks if E is valid
 				if (Su.array[5] == INACCESSIBLE) {
 					legal = false;
-					break;
-				}
+					break; }
 				else { return true; }
 			}
-			case W: {                           // checks if W is valid
+			case W: {                                   // checks if W is valid
 				if (Su.array[3] == INACCESSIBLE) {
-					legal = false;
-					break;
-				}
+					legal = false; break; }
 				else { return true; }
 			}
-			case SE: {                           // checks if SE is valid
+			case SE: {                                  // checks if SE is valid
 				if (Su.array[8] == INACCESSIBLE) {
-					legal = false;
-					break;
-				}
+					legal = false; break; }
 				else { return true; }
 			}
-			case SW: {                           // checks if SW is valid
+			case SW: {                                  // checks if SW is valid
 				if (Su.array[6] == INACCESSIBLE) {
-					legal = false;
-					break;
-				}
+					legal = false; break; }
 				else { return true; }
 			}
-			case S: {                           // checks if S is valid
+			case S: {                                   // checks if S is valid
 				if (Su.array[7] == INACCESSIBLE) {
-					legal = false;
-					break;
-				}
+					legal = false; break; }
 				else { return true; }
 			}
 			case STAY: {
-				legal = true;
-				break;
-			} // if ac is Stay return true
+				legal = true; break; }                  // if ac is Stay return true
 		}
-		return legal;                           // used to remove warnings on compiler
-		// process should never reach here unless
-		// data is corrupt
+		return legal;                                   // used to remove warnings on compiler
+														// process should never reach here unless
+														// data is corrupt
 	}
 
 	//*********************************************************************
@@ -656,8 +613,8 @@ namespace Gaming {
 				new_pos.x = pos.x - 1;                      // set new pos values
 				new_pos.y = pos.y;
 				if (__grid[new_pos.x * __width + new_pos.y] != 0) {
-					// check for empty if ! then perform
-					// Piece interaction
+															// check for empty if ! then perform
+															// Piece interaction
 					this->__grid[pos.x * __width + pos.y]->operator*(*__grid[new_pos.x * __width + new_pos.y]);
 				}
 				return new_pos;                             // return new location
@@ -666,8 +623,8 @@ namespace Gaming {
 				new_pos.x = pos.x - 1;                      // set new pos values
 				new_pos.y = pos.y - 1;
 				if (__grid[new_pos.x * __width + new_pos.y] != 0) {
-					// check for empty if ! then perform
-					// Piece interaction
+															// check for empty if ! then perform
+															// Piece interaction
 					this->__grid[pos.x * __width + pos.y]->operator*(*__grid[new_pos.x * __width + new_pos.y]);
 				}
 				return new_pos;                             // return new location
@@ -676,8 +633,8 @@ namespace Gaming {
 				new_pos.x = pos.x - 1;                      // set new pos values
 				new_pos.y = pos.y + 1;
 				if (__grid[new_pos.x * __width + new_pos.y] != 0) {
-					// check for empty if ! then perform
-					// Piece interaction
+															// check for empty if ! then perform
+															// Piece interaction
 					this->__grid[pos.x * __width + pos.y]->operator*(*__grid[new_pos.x * __width + new_pos.y]);
 				}
 				return new_pos;                             // return new location
@@ -686,8 +643,8 @@ namespace Gaming {
 				new_pos.x = pos.x + 1;                      // set new pos values
 				new_pos.y = pos.y;
 				if (__grid[new_pos.x * __width + new_pos.y] != 0) {
-					// check for empty if ! then perform
-					// Piece interaction
+															// check for empty if ! then perform
+															// Piece interaction
 					this->__grid[pos.x * __width + pos.y]->operator*(*__grid[new_pos.x * __width + new_pos.y]);
 				}
 				return new_pos;                             // return new location
@@ -696,8 +653,8 @@ namespace Gaming {
 				new_pos.x = pos.x + 1;                      // set new pos values
 				new_pos.y = pos.y - 1;
 				if (__grid[new_pos.x * __width + new_pos.y] != 0) {
-					// check for empty if ! then perform
-					// Piece interaction
+															// check for empty if ! then perform
+															// Piece interaction
 					this->__grid[pos.x * __width + pos.y]->operator*(*__grid[new_pos.x * __width + new_pos.y]);
 				}
 				return new_pos;                             // return new location
@@ -706,8 +663,8 @@ namespace Gaming {
 				new_pos.x = pos.x + 1;                      // set new pos values
 				new_pos.y = pos.y + 1;
 				if (__grid[new_pos.x * __width + new_pos.y] != 0) {
-					// check for empty if ! then perform
-					// Piece interaction
+															// check for empty if ! then perform
+															// Piece interaction
 					this->__grid[pos.x * __width + pos.y]->operator*(*__grid[new_pos.x * __width + new_pos.y]);
 				}
 				return new_pos;                             // return new location
@@ -716,8 +673,8 @@ namespace Gaming {
 				new_pos.x = pos.x;                          // set new pos values
 				new_pos.y = pos.y + 1;
 				if (__grid[new_pos.x * __width + new_pos.y] != 0) {
-					// check for empty if ! then perform
-					// Piece interaction
+															// check for empty if ! then perform
+															// Piece interaction
 					this->__grid[pos.x * __width + pos.y]->operator*(*__grid[new_pos.x * __width + new_pos.y]);
 				}
 				return new_pos;                             // return new location
@@ -726,8 +683,8 @@ namespace Gaming {
 				new_pos.x = pos.x;                          // set new pos values
 				new_pos.y = pos.y - 1;
 				if (__grid[new_pos.x * __width + new_pos.y] != 0) {
-					// check for empty if ! then perform
-					// Piece interaction
+															// check for empty if ! then perform
+															// Piece interaction
 					this->__grid[pos.x * __width + pos.y]->operator*(*__grid[new_pos.x * __width + new_pos.y]);
 				}
 				return new_pos;                             // return new location
@@ -750,22 +707,26 @@ namespace Gaming {
 	void Game::round() {
 
 		for (int i = 0; i < __width * __height; i++) {      // loops the game through
-			// all positions
+															// all positions
 			if (__grid[i] != nullptr && !(__grid[i]->isViable())) {
 				delete __grid[i];
-				__grid[i] = nullptr;      // if the Piece is not valid delete
+				__grid[i] = nullptr;                        // if the Piece is not valid delete
 			}
-			else if (__grid[i] != nullptr && !(__grid[i]->getTurned())) {
-				// if the Piece in the position
-				// has not had a turn then call setPosition
+			if (__grid[i] != nullptr){
+				if (__grid[i]->getType() == FOOD || __grid[i]->getType() == ADVANTAGE){__grid[i]->setTurned(true);}
+				else if (!(__grid[i]->getTurned())) {
+															// if the Piece in the position
+															// has not had a turn then call setPosition
 				__grid[i]->setPosition(
 						move(__grid[i]->getPosition(), __grid[i]->takeTurn(getSurroundings(__grid[i]->getPosition()))));
-				// setPosition calls move with the current position and a takeTurn call
-				// takeTurn calls getSurroundings with the current position
+															// setPosition calls move with the current
+															// position and a takeTurn call takeTurn calls
+															// getSurroundings with the current position
 				if (__grid[i]->isViable()) {                // if this statement is removed tests wont complete
 					Position newPos = __grid[i]->getPosition();
 					__grid[newPos.x * __width + newPos.y] = __grid[i];
 					__grid[i]                             = nullptr;
+					}
 				}
 			}
 		}
@@ -773,11 +734,10 @@ namespace Gaming {
 			if (__grid[i] != nullptr) {                     // if not 0
 				if (__grid[i]->isViable()) {                // check for viable
 					__grid[i]->age();                       // age position
-					__grid[i]->setTurned(false);            // set to not turned
-					if (!(__grid[i]->isViable())) {         // if Peice is not viable delete
-						delete __grid[i];
-						__grid[i] = nullptr;
-					}
+					__grid[i]->setTurned(false); }          // set to not turned
+				if (!(__grid[i]->isViable())) {             // if Peice is not viable delete
+					delete __grid[i];
+					__grid[i] = nullptr;
 				}
 			}
 		}
@@ -802,7 +762,7 @@ namespace Gaming {
 			unsigned int numAdvantagesP = __numInitResources / 4;
 			unsigned int numFoodsP = __numInitResources - numAdvantagesP;
 
-			std::default_random_engine         gen;                 // random generator
+			std::default_random_engine         gen;         // random generator
 			std::uniform_int_distribution<int> d(0, __width * __height);
 
 			while (numStrategicP > 0) {                     // loop to initialize Strategic Agents
@@ -856,16 +816,16 @@ namespace Gaming {
 	void Game::play(bool verbose) {
 		__status = PLAYING;                                 // sets the status to playing
 		while (__status != OVER) {                          // runs until the status is set to over
-			if (verbose) {                                    // if verbose is true
+			if (verbose) {                                  // if verbose is true
 				std::cout << *this;
-			}                         // prints out the game board
+			}                                               // prints out the game board
 			round();                                        // calls the round function to play the game
-			if (getNumResources() == 0) {                     // checks if the game is over
+			if (getNumResources() == 0) {                   // checks if the game is over
 				__status = OVER;
-			}                            // ends game
+			}                                               // ends game
 		}
-		if (verbose) {                                        // if verbose is true
+		if (verbose) {                                      // if verbose is true
 			std::cout << *this;
-		}                             // prints out the game board
+		}                                                   // prints out the game board
 	}
 }
