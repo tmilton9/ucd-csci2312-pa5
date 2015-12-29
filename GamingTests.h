@@ -5,11 +5,9 @@
 #ifndef PA5GAME_GAMINGTESTS_H
 #define PA5GAME_GAMINGTESTS_H
 
-
 #include "ErrorContext.h"
 
 using namespace Testing;
-
 
 // - - - - - - - - - Tests: class Piece - - - - - - - - - -
 
@@ -31,18 +29,15 @@ void test_piece_turntaking(ErrorContext &ec, unsigned int numRuns);
 // Piece interaction operator*
 void test_piece_interaction(ErrorContext &ec, unsigned int numRuns);
 
-
 // - - - - - - - - - Tests: struct Surroundings - - - - - - - - - -
 
 // Surroundings (vector of enums of type PieceType)
 void test_surroundings_smoketest(ErrorContext &ec);
 
-
 // - - - - - - - - - Tests: enum ActionType - - - - - - - - - -
 
 // Action smoke test
 void test_action_smoketest(ErrorContext &ec);
-
 
 // - - - - - - - - - Tests: class Game - - - - - - - - - -
 

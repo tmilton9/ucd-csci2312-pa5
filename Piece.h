@@ -9,57 +9,63 @@
 
 #include "Game.h"
 
-
 namespace Gaming {
+	class Resource;
 
-    class Resource;
+	class Piece {
+	private:
 
-    class Piece {
+		static unsigned int __idGen;
 
-    private:
+		bool __finished;
+		bool __turned;
 
+		Position __position;
 
-        static unsigned int __idGen;
+	protected:
+		const Game   &__game; // note: a reference to the Game object
+		unsigned int __id;
 
-        bool __finished;
-        bool __turned;
+		virtual void print(std::ostream &os) const = 0;
 
-        Position __position;
+		void finish() { __finished = true; }
 
-    protected:
-        const Game &__game; // note: a reference to the Game object
-        unsigned int __id;
+		bool isFinished() const { return __finished; }
 
-        virtual void print(std::ostream &os) const = 0;
+	public:
+		Piece(const Game &g, const Position &p, const Game &__game);
 
-        void finish() { __finished = true; }
-        bool isFinished() const { return __finished; }
+		bool positioned;
 
-    public:
-        Piece(const Game &g, const Position &p, const Game &__game);
+		virtual ~Piece();
 
-        bool positioned;
-        virtual ~Piece();
+		Position getPosition() const { return __position; }
 
-        Position getPosition() const { return __position; }
-        void setPosition(const Position &p) { __position = p; }
+		void setPosition(const Position &p) {
+			__position = p;
+			__turned   = true;
+		}// set the position to turned true
 
-        bool getTurned() const { return __turned; }
-        void setTurned(bool turned) { __turned = turned; }
+		bool getTurned() const { return __turned; }
 
-        virtual void age() = 0;
-        virtual bool isViable() const = 0;
-        virtual PieceType getType() const = 0;
+		void setTurned(bool turned) { __turned = turned; }
 
-        virtual ActionType takeTurn(const Surroundings &surr) const = 0; // note: doesn't actually change the object
+		virtual void age() = 0;
 
-        virtual Piece &operator*(Piece &other) = 0;
-        virtual Piece &interact(Agent *) = 0;
-        virtual Piece &interact(Resource *) = 0;
+		virtual bool isViable() const = 0;
 
-        friend std::ostream &operator<<(std::ostream &os, const Piece &piece);
-    };
+		virtual PieceType getType() const = 0;
+
+		virtual ActionType takeTurn(const Surroundings &surr) const = 0; // note: doesn't actually change the object
+
+		virtual Piece &operator*(Piece &other) = 0;
+
+		virtual Piece &interact(Agent *) = 0;
+
+		virtual Piece &interact(Resource *) = 0;
+
+		friend std::ostream &operator<<(std::ostream &os, const Piece &piece);
+	};
 }
-
 
 #endif //PA5GAME_GAMEUNIT_H

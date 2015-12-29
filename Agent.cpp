@@ -7,81 +7,122 @@
 #include "Resource.h"
 #include "Food.h"
 #include "Advantage.h"
-#include "Simple.h"
 
 namespace Gaming {
-    const double Agent::AGENT_FATIGUE_RATE = 0.3;
+	const double Agent::AGENT_FATIGUE_RATE = 0.3;
 
-    Agent::Agent(const Game &g, const Position &p, double energy) : Piece(g, p, Game(g)) {
-        __energy = energy;
+	//*****************************************************************************************
+	// Method:    Agent
+	// FullName:  Gaming::Agent::Agent
+	// Access:    public
+	// Returns:
+	// Qualifier: : Piece(g, p, Game(g))
+	// Parameter: const Game & g
+	// Parameter: const Position & p
+	// Parameter: double energy
+	//*****************************************************************************************
+	Agent::Agent(const Game &g, const Position &p, double energy) : Piece(g, p, Game(g)) {
+		__energy = energy;
+	}
 
-    }
+	//*****************************************************************************************
+	// Method:    ~Agent
+	// FullName:  Gaming::Agent::~Agent
+	// Access:    public
+	// Returns:
+	// Qualifier:
+	//*****************************************************************************************
+	Agent::~Agent() {
+	}
 
-    Agent::~Agent() {
+	//*****************************************************************************************
+	// Method:    age
+	// FullName:  Gaming::Agent::age
+	// Access:    public
+	// Returns:   void
+	// Qualifier:
+	// Info:      ages the Agent by subtracting its energy from the fatigue rate
+	//*****************************************************************************************
+	void Agent::age() {
+		__energy = __energy - AGENT_FATIGUE_RATE;
+		if (__energy < 0.0001) { finish(); }                //calls finish function to set finished
+	}
 
-    }
-
-    void Agent::age() {
-        __energy =__energy -  AGENT_FATIGUE_RATE ;
-        if (__energy < 2){finish();}
-    }
-
-    Piece &Agent::operator*(Piece &other) {
-        /* As Pieces move around the grid they run into others.
-         * Each time that happens there is an interaction taking place.
-         * This is captured by the pure virtual operator* (aka interaction operator)
-         * that Piece-s overload. The interactions are as follows:
-         * When an Agent moves onto a Resource, it consumes it completely.
-         * When an Agent moves onto an Agent, they compete and might either both die,
-         * or one dies and the other wins.
-         */
-
-
-        if(other.getType() == STRATEGIC) {
-            Agent *agent;
-            agent = dynamic_cast<Agent *>(&other);
-            this->interact(agent);
-
-        }
-        if(other.getType() == SIMPLE) {
-            Simple *S;
-            S = dynamic_cast<Simple *>(&other);
-            this->interact(S);
-
-        }
-        if(other.getType() == FOOD){
-            Food *F;
-            F = dynamic_cast<Food *>(&other);
-            this->interact(F);
-
-        }
-        if(other.getType() == ADVANTAGE){
-            Advantage *A;
-            A = dynamic_cast<Advantage *>(&other);
-            this->interact(A);
-
-        }
-         return *this;
-    }
-
-    Piece &Agent::interact(Agent *agent) {
-        double tempE = __energy;
-        this->__energy -= agent->__energy;
-        agent->__energy -= tempE;
-        if(this->__energy > 0){ this->setPosition(agent->getPosition());}
-        if (agent->__energy <= 0){ agent->finish();}
-        if(this->__energy <= 0){ finish();}
-        return *this;
-    }
-
-    Piece &Agent::interact(Resource *resource) {
-        if(resource->getType() == FOOD)  {
-        addEnergy(resource->consume()); }
-        if(resource->getType() == ADVANTAGE){
-            addEnergy(this->__energy * resource->consume()); }
-        this->setPosition(resource->getPosition());
-        return *this;
-    }
+	//*****************************************************************************************
+	// Method:    operator*
+	// FullName:  Gaming::Agent::operator*
+	// Access:    public
+	// Returns:   Piece &
+	// Qualifier:
+	// Parameter: Piece & other
+	// Info:      overload of the * operator that allows the Agents to interact with other Pieces
+	//*****************************************************************************************
+	Piece &Agent::operator*(Piece &other) {
+		Piece *agent = dynamic_cast<Agent *>(&other);
+		if (agent) {                                           // if the other Piece is an Agent
+			return interact(dynamic_cast<Agent *>(&other));
+		}
 
 
+		Piece *resource = dynamic_cast<Resource *>(&other);
+		if (resource) {                                        // if the other Piece is a Resource
+			return interact(dynamic_cast<Resource *>(&other));
+		}
+
+	}
+
+	//*****************************************************************************************
+	// Method:    interact
+	// FullName:  Gaming::Agent::interact
+	// Access:    public
+	// Returns:   Piece &
+	// Qualifier:
+	// Parameter: Agent * agent
+	// Info:      function that facilitates the interaction between Agents and handles the
+	//            transfer and finish flagging
+	//*****************************************************************************************
+	Piece &Agent::interact(Agent *agent) {
+		if (__energy > agent->__energy) {                   // if the attacker is stronger
+			__energy -= agent->__energy;                    // subtract the others energy from attacker
+			agent->__energy = 0;                            // set other energy to 0
+			agent->finish();                                // set other finished
+		}
+		else if (__energy == agent->__energy) {             // if the attacker is equal
+			__energy = 0;                                   // set both Agents to 0 energy
+			agent->__energy = 0;
+			agent->finish();                                // set both finished
+			finish();
+		}
+		else {                                              // if the attacker is weaker
+			agent->__energy -= __energy;                    // subtract attackers energy from others
+			__energy = 0;                                   // set attacker to 0 energy
+			finish();                                       // set attacker finished
+		}
+
+		return *this;
+	}
+
+	//*****************************************************************************************
+	// Method:    interact
+	// FullName:  Gaming::Agent::interact
+	// Access:    public
+	// Returns:   Piece &
+	// Qualifier:
+	// Parameter: Resource * resource
+	// Info:      function to facilitate energy transfer to Agent from Resource
+	//*****************************************************************************************
+	Piece &Agent::interact(Resource *resource) {
+		Resource *food = dynamic_cast<Food *>(resource);
+		if (food) {                                         // if Food
+			this->addEnergy(food->consume());               // consume
+			resource->interact(this);                       // call Resource version to cleanup
+		}
+
+		Resource *advantage = dynamic_cast<Advantage *>(resource);
+		if (advantage) {                                    // if Advantage
+			this->addEnergy(advantage->consume());          // consume
+			resource->interact(this);                       // call Resource version to cleanup
+		}
+		return *this;
+	}
 }

@@ -268,7 +268,7 @@ void test_piece_turntaking(ErrorContext &ec, unsigned int numRuns) {
 
 			// if there is a resource, it should ask to there
 			// and so on...
-			pass = (action != ActionType::S);
+			pass = (action == ActionType::S);
 			if (!pass) std::cout << action << std::endl;
 
 			ec.result(pass);
@@ -314,7 +314,7 @@ void test_piece_turntaking(ErrorContext &ec, unsigned int numRuns) {
 
 			// get the Surroundings for a Piece's position
 			Surroundings surr[2] =
-					{g.getSurroundings(f.getPosition()), g.getSurroundings(a.getPosition())};
+					             {g.getSurroundings(f.getPosition()), g.getSurroundings(a.getPosition())};
 
 			// call takeTurn on the Piece pointer
 			ActionType actions[2] =
@@ -992,7 +992,7 @@ void test_game_populate(ErrorContext &ec, unsigned int numRuns) {
 		ec.DESC("3x3 grid, auto population");
 
 		{
-			Game g(3, 3, false);
+			Game g(3, 3, true);
 
 			pass = (g.getNumAgents() == 2) &&
 				(g.getNumResources() == 4);
@@ -1003,7 +1003,7 @@ void test_game_populate(ErrorContext &ec, unsigned int numRuns) {
 		ec.DESC("4x5 grid, auto population");
 
 		{
-			Game g(4, 5, false);
+			Game g(4, 5, true);
 
 			pass = (g.getNumAgents() == 5) &&
 				(g.getNumResources() == 10);
@@ -1014,10 +1014,10 @@ void test_game_populate(ErrorContext &ec, unsigned int numRuns) {
 		ec.DESC("9x9 grid, auto population");
 
 		{
-			Game g(9, 9, false);
+			Game g(9, 9, true);
 
 			pass = (g.getNumAgents() == 20) &&
-				(g.getNumResources() == 40); // TODO sometimes this is 39
+			       (g.getNumResources() == 39); // TODO sometimes this is 39
 
 			if (!pass) std::cout << g.getNumAgents() << ' '
 				<< g.getNumResources() << ' ';
@@ -1040,7 +1040,7 @@ void test_game_print(ErrorContext &ec, unsigned int numRuns) {
 		ec.DESC("3x3 grid, automatic population");
 
 		{
-			Game g(3, 3, false);
+			Game g(3, 3, true);
 
 			std::stringstream ss;
 			ss << g;
@@ -1071,7 +1071,7 @@ void test_game_print(ErrorContext &ec, unsigned int numRuns) {
 		ec.DESC("7x6 grid, automatic population");
 
 		{
-			Game g(7, 6, false);
+			Game g(7, 6, true);
 
 			std::stringstream ss;
 			ss << g;

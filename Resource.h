@@ -9,34 +9,34 @@
 #include "Piece.h"
 
 namespace Gaming {
+	class Resource : public Piece {
+	protected:
+		double __capacity;
 
-    class Resource : public Piece {
+	public:
+		static const double RESOURCE_SPOIL_FACTOR;
 
-    protected:
-        double __capacity;
-        
-    public:
-        static const double RESOURCE_SPOIL_FACTOR;
+		Resource(const Game &g, const Position &p, double capacity);
 
-        Resource( const Game &g, const Position &p, double capacity);
-        ~Resource();
+		~Resource();
 
-        virtual double getCapacity() const { return __capacity; }
-        virtual double consume();
+		virtual double getCapacity() const { return __capacity; }
 
-        void age() override final;
+		virtual double consume();
 
-        bool isViable() const override final { return !isFinished() && __capacity > 0.0; }
+		void age() override final;
 
-        ActionType takeTurn(const Surroundings &s) const override;
+		bool isViable() const override final { return !isFinished() && __capacity > 0.0; }
 
-        // note: these won't be called while resources don't move
-        Piece &operator*(Piece &other) override final;
-        Piece &interact(Agent *) override final;
-        Piece &interact(Resource *) override final; // note: no interaction between resources
-    };
+		ActionType takeTurn(const Surroundings &s) const override;
 
+		// note: these won't be called while resources don't move
+		Piece &operator*(Piece &other) override final;
+
+		Piece &interact(Agent *) override final;
+
+		Piece &interact(Resource *) override final; // note: no interaction between resources
+	};
 }
-
 
 #endif //PA5GAME_RESOURCE_H

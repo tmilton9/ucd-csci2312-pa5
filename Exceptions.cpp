@@ -5,47 +5,93 @@
 #include <iosfwd>
 #include "Exceptions.h"
 namespace Gaming {
-	void GamingException::setName(std::string name) {
+	//************************************
+	// Method:    operator<<
+	// FullName:  Gaming::operator<<
+	// Access:    public
+	// Returns:   std::ostream&
+	// Qualifier:
+	// Parameter: std::ostream & os
+	// Parameter: const GamingException & ex
+	//************************************
+	std::ostream &operator<<(std::ostream &os, const GamingException &ex) {
+		os << "Exception occured: " << ex.getName() << " ";
+		ex.__print_args(os);
+		return os;
 	}
 
+	//************************************
+	// Method:    DimensionEx
+	// FullName:  Gaming::DimensionEx::DimensionEx
+	// Access:    public
+	// Returns:
+	// Qualifier:
+	// Parameter: unsigned expWidth
+	// Parameter: unsigned expHeight
+	// Parameter: unsigned width
+	// Parameter: unsigned height
+	//************************************
 	DimensionEx::DimensionEx(unsigned expWidth, unsigned expHeight, unsigned width, unsigned height) {
+		__exp_width  = expWidth;
+		__exp_height = expHeight;
+		__width      = width;
+		__height     = height;
 	}
 
-	unsigned DimensionEx::getExpWidth() const {
-		return 0;
+	//************************************
+	// Method:    InsufficientDimensionsEx
+	// FullName:  Gaming::InsufficientDimensionsEx::InsufficientDimensionsEx
+	// Access:    public
+	// Returns:
+	// Qualifier: : DimensionEx(minWidth, minHeight, width, height)
+	// Parameter: unsigned minWidth
+	// Parameter: unsigned minHeight
+	// Parameter: unsigned width
+	// Parameter: unsigned height
+	//************************************
+	InsufficientDimensionsEx::InsufficientDimensionsEx(unsigned minWidth, unsigned minHeight, unsigned width,
+	                                                   unsigned height) : DimensionEx(minWidth, minHeight, width,
+	                                                                                  height) {
+		setName("InsufficientDimensionsEx");
 	}
 
-	unsigned DimensionEx::getExpHeight() const {
-		return 0;
-	}
-
-	unsigned DimensionEx::getWidth() const {
-		return 0;
-	}
-
-	unsigned DimensionEx::getHeight() const {
-		return 0;
-	}
-
-	void DimensionEx::__print_args(std::ostream &os) const {
-	}
-
+	//************************************
+	// Method:    __print_args
+	// FullName:  Gaming::InsufficientDimensionsEx::__print_args
+	// Access:    private
+	// Returns:   void
+	// Qualifier: const
+	// Parameter: std::ostream & os
+	//************************************
 	void InsufficientDimensionsEx::__print_args(std::ostream &os) const {
-		DimensionEx::__print_args(os);
+		os << "(__exp_width: " << __exp_width << ", __exp_height: " << __exp_height << ", PassedWidth: "
+		<< __width << ", PassedHeight: " << __height << ")";
 	}
 
-	InsufficientDimensionsEx::InsufficientDimensionsEx(unsigned minWidth, unsigned minHeight, unsigned width, unsigned height)
-		: DimensionEx(minWidth, minHeight, width, height) {
-	}
+	//************************************
+	// Method:    OutOfBoundsEx
+	// FullName:  Gaming::OutOfBoundsEx::OutOfBoundsEx
+	// Access:    public
+	// Returns:
+	// Qualifier: : DimensionEx(maxWidth, maxHeight, width, height)
+	// Parameter: unsigned maxWidth
+	// Parameter: unsigned maxHeight
+	// Parameter: unsigned width
+	// Parameter: unsigned height
+	//************************************
+	OutOfBoundsEx::OutOfBoundsEx(unsigned maxWidth, unsigned maxHeight, unsigned width, unsigned height) : DimensionEx(
+			maxWidth, maxHeight, width, height) { setName("OutOfBoundsEx"); }
 
+	//************************************
+	// Method:    __print_args
+	// FullName:  Gaming::OutOfBoundsEx::__print_args
+	// Access:    private
+	// Returns:   void
+	// Qualifier: const
+	// Parameter: std::ostream & os
+	//************************************
 	void OutOfBoundsEx::__print_args(std::ostream &os) const {
-		DimensionEx::__print_args(os);
-	}
-
-	OutOfBoundsEx::OutOfBoundsEx(unsigned maxWidth, unsigned maxHeight, unsigned width, unsigned height) : DimensionEx(maxWidth, maxHeight, width, height) {
-	}
-	std::ostream & operator<<(std::ostream & os, const GamingException & ex)
-	{
-		return os;// TODO: insert return statement here
+		os << "(maxWIdth: " << __exp_width << ", maxHeight: " << __exp_height << ", PassedWidth: " << __width
+		<< ", PassedHeight:" << __height << ")";
 	}
 }
